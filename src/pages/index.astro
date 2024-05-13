@@ -1,0 +1,317 @@
+---
+import Layout from "../layouts/Layout.astro";
+import FirstSection from "../components/FirstSection.astro";
+import CounterCircle from "../components/CounterCircle.astro";
+import RingIcon from "../components/RingIcon.astro";
+import FoodTray from "../components/FoodTray.astro";
+import "swiper/css";
+---
+
+<Layout title="Invitación boda Ana & Javier">
+	<div id="parallax-portada">
+		<img src="/src/assets/imgs/portada-1.webp" />
+	</div>
+	<FirstSection />
+	<section id="second-section" style="position: relative; height: 350px;">
+		<CounterCircle />
+	</section>
+	<section id="ceremony-section">
+		<div id="timeline">
+			<div id="timeline-container">
+				<div id="ceremony">
+					<span class="info">
+						Ceremonia 12:00h Centro Cultural Gómez Tortosa Carrer
+						Major, 6, Novelda
+					</span>
+					<div class="icon-container">
+						<RingIcon />
+					</div>
+				</div>
+				<div id="banquet">
+					<span class="info">
+						BANQUETE 13:00H Quinta Lacy Av. San Luis de Cuba, 1,
+						Elda, Alicante
+					</span>
+					<div class="icon-container">
+						<FoodTray />
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="transport-information">
+			<img
+				src="https://media.canva.com/1/image-resize/1/162_200_100_PNG_F/czM6Ly9tZWRpYS1wcml2YXRlLmNhbnZhLmNvbS9WS1JBOC9NQUdCZVlWS1JBOC8xL3AucG5n?osig=AAAAAAAAAAAAAAAAAAAAAACBfBm--RoBbRKkcMJUTOV7qTc7J9KJbzGh8bo3rUPv&exp=1715470727&x-canva-quality=thumbnail&csig=AAAAAAAAAAAAAAAAAAAAABZeTvtAr5jbLSZqnKXkAwR1HNuWcKDsIz174xt5fKli"
+			/>
+			<p>
+				Habrá autobús de ida y vuelta con salida en Av. Constitución,
+				36, Novelda.
+			</p>
+		</div>
+	</section>
+	<section id="portrait-section">
+		<h1 class="title">Retratos de nuestro amor</h1>
+		<swiper-container init="false" navigation="false" pagination="true" pagination-clickable="true" space-between="30" 
+		centered-slides="true">
+			<swiper-slide>
+				<div class="img-container">
+					<img src="/src/assets/imgs/portada-1.webp" />
+				</div>
+			</swiper-slide>
+			<swiper-slide>
+				<div class="img-container">
+					<img src="/src/assets/imgs/portada-1.webp" />
+				</div>
+			</swiper-slide>
+			<swiper-slide>
+				<div class="img-container">
+					<img src="/src/assets/imgs/portada-1.webp" />
+				</div>
+			</swiper-slide>
+			<swiper-slide>
+				<div class="img-container">
+					<img src="/src/assets/imgs/portada-1.webp" />
+				</div>
+			</swiper-slide>
+			<swiper-slide>
+				<div class="img-container">
+					<img src="/src/assets/imgs/portada-1.webp" />
+				</div>
+			</swiper-slide>
+			<swiper-slide>
+				<div class="img-container">
+					<img src="/src/assets/imgs/portada-1.webp" />
+				</div>
+			</swiper-slide>
+		</swiper-container>
+	</section>
+</Layout>
+
+<style>
+	#parallax-portada {
+		position: fixed;
+		top: 0;
+		left: 0;
+		overflow: hidden;
+		width: 100vw;
+		height: calc(100% + 300px);
+
+		& img {
+			object-fit: cover;
+			transform: translate3d(0px, -90px, 0px);
+			position: absolute;
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	#info-section-circles-container {
+		display: flex;
+		justify-content: center;
+		gap: 5em;
+
+		> svg {
+			position: absolute;
+			left: 0;
+		}
+	}
+
+	#second-section {
+		display: flex;
+		justify-content: center;
+	}
+
+	#ceremony-section {
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+
+		& #transport-information {
+			display: flex;
+			justify-content: center;
+			gap: 1.5em;
+			padding: 1.5em 1em;
+
+			& img {
+				width: 40px;
+				height: 50px;
+			}
+
+			& p {
+				text-wrap: pretty;
+				text-align: center;
+			}
+		}
+	}
+
+	.title {
+		font-family: CookieRegular, system-ui;
+		text-align: center;
+		font-size: 60px;
+		color: #4a6360;
+	}
+
+	#portrait-section {
+		position: relative;
+
+		& swiper-container {
+			padding-block: 1em;
+		}
+
+		&
+	}
+
+	swiper-slide {
+		padding-bottom: 50px;
+
+		& .img-container {
+			box-shadow: 0px 0px 5px -1px rgba(0,0,0,0.40);
+			background-color: #eee;
+			padding: 15px;
+			padding-bottom: 100px;
+			transition: all 0.5s 0s ease;
+			
+			& img {
+				width: 100%;
+				object-fit: cover;
+			}
+		}
+
+		&.swiper-slide-active {
+			& .img-container {
+				background-color: #fff;
+			}
+		}
+	}
+
+	#timeline {
+		position: relative;
+		width: 100%;
+		height: 400px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		& #timeline-container {
+			position: relative;
+			height: 100%;
+			width: 420px;
+
+			& #ceremony {
+				position: absolute;
+				display: flex;
+				flex-direction: row-reverse;
+				align-items: center;
+				gap: 1em;
+				top: 50px;
+				left: 106px;
+
+				& .icon-container::after {
+					display: block;
+					content: "";
+					width: 20px;
+					height: 20px;
+					border-radius: 50%;
+					background-color: #85a160;
+				}
+			}
+
+			& #banquet {
+				position: absolute;
+				display: flex;
+				align-items: center;
+				gap: 1em;
+				bottom: 50px;
+				right: 106px;
+
+				& .icon-container::before {
+					display: block;
+					content: "";
+					width: 20px;
+					height: 20px;
+					border-radius: 50%;
+					background-color: #85a160;
+				}
+			}
+
+			& #ceremony,
+			& #banquet {
+				& .info {
+					max-width: 150px;
+					padding: 15px;
+					text-align: center;
+					text-wrap: balance;
+					background-color: #f0e8db;
+				}
+			}
+
+			& .icon-container {
+				display: flex;
+				align-items: center;
+				gap: 1.5em;
+			}
+		}
+	}
+
+	#timeline::before {
+		content: "";
+		position: absolute;
+		border-radius: 10px;
+		width: 7px;
+		height: 100%;
+		background-color: #85a160;
+	}
+</style>
+
+<script>
+	// import function to register Swiper custom elements
+	import { register } from "swiper/element/bundle";
+	// register Swiper custom elements
+	register();
+
+	document.addEventListener("scroll", function () {
+		const parallaxPortada = document.getElementById("parallax-portada");
+		parallaxPortada.style.transform = `translate3d(0px, ${window.scrollY * -1}px, 0px)`;
+
+		const parallaxPortadaImg = parallaxPortada.querySelector("img");
+		const scrollYParallaxImg = window.scrollY * 0.6 - 90;
+		parallaxPortadaImg.style.transform = `translate3d(0px, ${scrollYParallaxImg}px, 0px)`;
+	});
+
+	// swiper element
+	const swiperEl = document.querySelector("swiper-container");
+
+	// swiper parameters
+	const swiperParams = {
+		loop: true,
+		slidesPerView: 1,
+		injectStyles: [
+			`
+				.swiper-pagination {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					
+					& .swiper-pagination-bullet-active {
+						background-color: #4a6360;
+						width: 10px;
+						height: 10px;
+						transition: width 0.5s ease, height 0.5s ease;
+					}
+				}
+			`,
+		],
+		breakpoints: {
+        768: {
+          slidesPerView: 3,
+          spaceBetween: 20,
+        },
+      },
+	};
+
+	// now we need to assign all parameters to Swiper element
+	Object.assign(swiperEl, swiperParams);
+
+	// and now initialize it
+	swiperEl.initialize();
+</script>

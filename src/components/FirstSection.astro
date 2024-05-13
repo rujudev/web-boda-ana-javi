@@ -1,0 +1,66 @@
+<section id="fron-page-section">
+    <div id="couple-names-container">
+        <div id="couple-names">
+            <span class="name">Ana</span>
+            <span id="and">&</span>
+            <span class="name">Javier</span>
+        </div>
+    </div>
+</section>
+
+<style>
+    section {
+        position: relative;
+        height: calc(100vh + 300px);
+    }
+
+    section::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(74, 79, 96, 0.65);
+        z-index: 0;
+        top: 0;
+        left: 0;
+    }
+
+    /* section::after {
+        background-image: url("../assets/imgs/separator.svg");
+        position: absolute;
+        content: '';
+        background-repeat: no-repeat;
+        background-position: bottom center;
+        height: 100%;
+        width: 100%;
+        bottom: -10%;
+        z-index: 9;
+    } */
+
+    #couple-names-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #couple-names {
+        font-family: Amsterdam, CormorantGaramondMedium, system-ui !important;
+        font-size: 5.5em;
+        padding-bottom: 1.5em;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #eeeeee;
+    }
+
+    #and {
+        position: absolute;
+        font-size: 3em;
+        opacity: 0.4;
+    }
+</style>

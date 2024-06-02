@@ -455,14 +455,13 @@
     }
 
     #counter-frame-container {
-        width: 400px;
-        height: 400px;
+        width: clamp(350px, 92vw, 400px);
         z-index: 1;
     }
 
     #counter-date-container {
         position: absolute;
-        top: 4.5em;
+        top: 4.3em;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         justify-content: center;

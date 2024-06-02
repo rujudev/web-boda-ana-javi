@@ -89,6 +89,27 @@ const { title } = Astro.props;
 		text-wrap: pretty;
 	}
 
+	.button {
+		all: unset;
+		text-align: center;
+		border-radius: 50px;
+		background-color: #fff;
+		box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.40);
+		cursor: pointer;
+		padding: 13px 30px;
+		border: none;
+		text-transform: uppercase;
+		font-weight: 700;
+		font-family: 'Open Sans', sans-serif;
+
+		transition: all 0.5s 0s ease;
+
+		&:hover {
+			background-color: #81948B;
+			color: #fff;
+		}
+	}
+
 	#tel-info-container {
 		display: flex;
 		gap: 5em;

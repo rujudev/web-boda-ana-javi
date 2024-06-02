@@ -2,9 +2,6 @@
 import Layout from "../layouts/Layout.astro";
 import FirstSection from "../components/FirstSection.astro";
 import CounterCircle from "../components/CounterCircle.astro";
-import RingIcon from "../components/RingIcon.astro";
-import FoodTray from "../components/FoodTray.astro";
-import "swiper/css";
 ---
 
 <Layout title="Invitación boda Ana & Javier">
@@ -12,77 +9,50 @@ import "swiper/css";
 		<img src="/src/assets/imgs/portada-1.webp" />
 	</div>
 	<FirstSection />
-	<section id="second-section" style="position: relative; height: 350px;">
+	<section id="second-section">
 		<CounterCircle />
 	</section>
 	<section id="ceremony-section">
-		<div id="timeline">
-			<div id="timeline-container">
-				<div id="ceremony">
-					<span class="info">
-						Ceremonia 12:00h Centro Cultural Gómez Tortosa Carrer
-						Major, 6, Novelda
-					</span>
-					<div class="icon-container">
-						<RingIcon />
-					</div>
+		<div id="ring-container">
+			<div class="anim-anillos circle"></div>
+			<div class="ceremony-title-container">
+				<h2>Ceremonia</h2>
+			</div>
+			<div class="hour">
+				<h6>Hora</h6>
+				<span>12:00h</span>
+			</div>
+			<div class="address">
+				<h6>Lugar</h6>
+				<div style="display: flex; flex-direction: column; gap: .5em;">
+					<span class="site-name"><b>Centro cultural Gómez Tortosa</b></span>
+					<span class="site-address">Carrer Major, 6, Novelda, Alicante</span>
 				</div>
-				<div id="banquet">
-					<span class="info">
-						BANQUETE 13:00H Quinta Lacy Av. San Luis de Cuba, 1,
-						Elda, Alicante
-					</span>
-					<div class="icon-container">
-						<FoodTray />
-					</div>
-				</div>
+				<a href="https://maps.app.goo.gl/xKNxoUs1ax7qy1aM6" class="button">¿Cómo llegar?</a>
 			</div>
 		</div>
-		<div id="transport-information">
-			<img
-				src="https://media.canva.com/1/image-resize/1/162_200_100_PNG_F/czM6Ly9tZWRpYS1wcml2YXRlLmNhbnZhLmNvbS9WS1JBOC9NQUdCZVlWS1JBOC8xL3AucG5n?osig=AAAAAAAAAAAAAAAAAAAAAACBfBm--RoBbRKkcMJUTOV7qTc7J9KJbzGh8bo3rUPv&exp=1715470727&x-canva-quality=thumbnail&csig=AAAAAAAAAAAAAAAAAAAAABZeTvtAr5jbLSZqnKXkAwR1HNuWcKDsIz174xt5fKli"
-			/>
-			<p>
-				Habrá autobús de ida y vuelta con salida en Av. Constitución,
-				36, Novelda.
-			</p>
+		<div id="party-container">
+			<div class="anim-fiesta circle"></div>
+			<div class="party-title-container">
+				<h2>Celebración</h2>
+			</div>
+			<div class="hour">
+				<h6>Hora</h6>
+				<span>13:00h</span>
+			</div>
+			<div class="address">
+				<h6>Lugar</h6>
+				<div style="display: flex; flex-direction: column; gap: .5em;">
+					<span class="site-name"><b>Quinta Lacy</b></span>
+					<span class="site-address">Av. San Luis de Cuba, 1, Elda, Alicante</span>
+				</div>
+				<a href="https://maps.app.goo.gl/xQHDi6eHjVE3hsvf7" class="button">¿Cómo llegar?</a>
+			</div>
 		</div>
-	</section>
-	<section id="portrait-section">
-		<h1 class="title">Retratos de nuestro amor</h1>
-		<swiper-container init="false" navigation="false" pagination="true" pagination-clickable="true" space-between="30" 
-		centered-slides="true">
-			<swiper-slide>
-				<div class="img-container">
-					<img src="/src/assets/imgs/portada-1.webp" />
-				</div>
-			</swiper-slide>
-			<swiper-slide>
-				<div class="img-container">
-					<img src="/src/assets/imgs/portada-1.webp" />
-				</div>
-			</swiper-slide>
-			<swiper-slide>
-				<div class="img-container">
-					<img src="/src/assets/imgs/portada-1.webp" />
-				</div>
-			</swiper-slide>
-			<swiper-slide>
-				<div class="img-container">
-					<img src="/src/assets/imgs/portada-1.webp" />
-				</div>
-			</swiper-slide>
-			<swiper-slide>
-				<div class="img-container">
-					<img src="/src/assets/imgs/portada-1.webp" />
-				</div>
-			</swiper-slide>
-			<swiper-slide>
-				<div class="img-container">
-					<img src="/src/assets/imgs/portada-1.webp" />
-				</div>
-			</swiper-slide>
-		</swiper-container>
+		<div id="assist-button-container" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+			<h2>¡Te esperamos!</h2>
+			<a href="#" class="button">Confirmar Asistencia</a>
+		</div>
 	</section>
 </Layout>
 
@@ -116,30 +86,146 @@ import "swiper/css";
 	}
 
 	#second-section {
+		position: relative;
+		height: 250px;
 		display: flex;
 		justify-content: center;
 	}
 
 	#ceremony-section {
-		display: flex;
-		justify-content: center;
-		flex-direction: column;
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-areas: "ceremony"
+							 "party"
+							 "confirm-assist";
+		font-family: 'Open Sans', sans-serif;
+		color: #81948B;
+		row-gap: 2em;
+		column-gap: 5em;
 
-		& #transport-information {
+		@media (min-width: 590px) {
+			& {
+				grid-template-columns: max-content max-content;
+				grid-template-areas: "ceremony . party"
+									 "confirm-assist confirm-assist confirm-assist";
+				justify-content: center;
+			}
+		}
+
+		& #ring-container {
+			grid-area: ceremony;
+		}
+
+		& #party-container {
+			grid-area: party;
+		}
+
+		& #assist-button-container {
+			grid-area: confirm-assist;
 			display: flex;
+			width: 100%;
 			justify-content: center;
-			gap: 1.5em;
-			padding: 1.5em 1em;
+		}
 
-			& img {
-				width: 40px;
-				height: 50px;
+		& #ring-container,
+		& #party-container {
+			max-width: 580px;
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			
+			& .ceremony-title-container,
+			& .party-title-container {
+				display: flex;
+				align-items: center;
+				position: relative;
+
+				& h2 {
+					font-family: 'CookieRegular', system-ui;
+					font-size: 35px;
+					color: #fff;
+					background-color: #81948B;
+					padding: 8px 30px;			
+				}
+
+				&::before,
+				&::after {
+					position: absolute;
+					z-index: -1;
+				}
+
+				&::before {
+					content: "";
+					width: 100%;
+					left: -20px;
+					background-color: #81948B;
+					border-top: 20px solid transparent;
+					border-left: 20px solid #faf7f3;
+					border-bottom: 20px solid transparent;
+				}
+				
+				&::after {
+					content: "";
+					width: 100%;
+					right: -20px;
+					background-color: #81948B;
+					border-top: 20px solid transparent;
+					border-right: 20px solid #faf7f3;
+					border-bottom: 20px solid transparent;
+				}
 			}
 
-			& p {
-				text-wrap: pretty;
+			& .hour,
+			& .address {
 				text-align: center;
+
+				& h6 {
+					font-size: 25px;
+					margin: 0 0 .5em 0;
+				}
 			}
+
+			& .address {
+				display: flex;
+				flex-direction: column;
+				gap: 1em;
+				margin-top: 3em;
+
+				& h6 {
+					margin: 0;
+				}
+			}
+
+		}
+
+		& span {
+			font-weight: 400;
+			font-size: 18px;
+
+			&.site-name {
+				text-transform: uppercase;
+			}
+		}
+	}
+
+	a.button {
+		all: unset;
+		text-align: center;
+		border-radius: 50px;
+		background-color: #fff;
+		box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.40);
+		cursor: pointer;
+		padding: 13px 30px;
+		border: none;
+		text-transform: uppercase;
+		font-weight: 700;
+
+		transition: all 0.5s 0s ease;
+
+		&:hover {
+			background-color: #81948B;
+			color: #fff;
 		}
 	}
 
@@ -148,16 +234,6 @@ import "swiper/css";
 		text-align: center;
 		font-size: 60px;
 		color: #4a6360;
-	}
-
-	#portrait-section {
-		position: relative;
-
-		& swiper-container {
-			padding-block: 1em;
-		}
-
-		&
 	}
 
 	swiper-slide {
@@ -183,89 +259,21 @@ import "swiper/css";
 		}
 	}
 
-	#timeline {
-		position: relative;
-		width: 100%;
-		height: 400px;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-
-		& #timeline-container {
-			position: relative;
-			height: 100%;
-			width: 420px;
-
-			& #ceremony {
-				position: absolute;
-				display: flex;
-				flex-direction: row-reverse;
-				align-items: center;
-				gap: 1em;
-				top: 50px;
-				left: 106px;
-
-				& .icon-container::after {
-					display: block;
-					content: "";
-					width: 20px;
-					height: 20px;
-					border-radius: 50%;
-					background-color: #85a160;
-				}
-			}
-
-			& #banquet {
-				position: absolute;
-				display: flex;
-				align-items: center;
-				gap: 1em;
-				bottom: 50px;
-				right: 106px;
-
-				& .icon-container::before {
-					display: block;
-					content: "";
-					width: 20px;
-					height: 20px;
-					border-radius: 50%;
-					background-color: #85a160;
-				}
-			}
-
-			& #ceremony,
-			& #banquet {
-				& .info {
-					max-width: 150px;
-					padding: 15px;
-					text-align: center;
-					text-wrap: balance;
-					background-color: #f0e8db;
-				}
-			}
-
-			& .icon-container {
-				display: flex;
-				align-items: center;
-				gap: 1.5em;
-			}
-		}
+	.circle {
+		box-shadow: 0px 0px 15px -1px rgba(0,0,0,0.4);
+		background-color: #fff;
+		border-radius: 50%;
+		padding: 1em;
 	}
 
-	#timeline::before {
-		content: "";
-		position: absolute;
-		border-radius: 10px;
-		width: 7px;
-		height: 100%;
-		background-color: #85a160;
+	.anim-anillos,
+	.anim-fiesta  {
+		width: 125px;
+		height: 125px;
 	}
 </style>
 
 <script>
-	// import function to register Swiper custom elements
-	import { register } from "swiper/element/bundle";
 	// register Swiper custom elements
 	register();
 
@@ -278,40 +286,67 @@ import "swiper/css";
 		parallaxPortadaImg.style.transform = `translate3d(0px, ${scrollYParallaxImg}px, 0px)`;
 	});
 
-	// swiper element
-	const swiperEl = document.querySelector("swiper-container");
+	// // swiper element
+	// const swiperEl = document.querySelector("swiper-container");
 
-	// swiper parameters
-	const swiperParams = {
-		loop: true,
-		slidesPerView: 1,
-		injectStyles: [
-			`
-				.swiper-pagination {
-					display: flex;
-					align-items: center;
-					justify-content: center;
+	// // swiper parameters
+	// const swiperParams = {
+	// 	loop: true,
+	// 	slidesPerView: 1,
+	// 	injectStyles: [
+	// 		`
+	// 			.swiper-pagination {
+	// 				display: flex;
+	// 				align-items: center;
+	// 				justify-content: center;
 					
-					& .swiper-pagination-bullet-active {
-						background-color: #4a6360;
-						width: 10px;
-						height: 10px;
-						transition: width 0.5s ease, height 0.5s ease;
-					}
-				}
-			`,
-		],
-		breakpoints: {
-        768: {
-          slidesPerView: 3,
-          spaceBetween: 20,
-        },
-      },
-	};
+	// 				& .swiper-pagination-bullet-active {
+	// 					background-color: #4a6360;
+	// 					width: 10px;
+	// 					height: 10px;
+	// 					transition: width 0.5s ease, height 0.5s ease;
+	// 				}
+	// 			}
+	// 		`,
+	// 	],
+	// 	breakpoints: {
+    //     768: {
+    //       slidesPerView: 3,
+    //       spaceBetween: 20,
+    //     },
+    //   },
+	// };
 
-	// now we need to assign all parameters to Swiper element
-	Object.assign(swiperEl, swiperParams);
+	// // now we need to assign all parameters to Swiper element
+	// Object.assign(swiperEl, swiperParams);
 
-	// and now initialize it
-	swiperEl.initialize();
+	// // and now initialize it
+	// swiperEl.initialize();
+
+	// Animación anillos
+	let svgContainerAnillos = document.querySelector('.anim-anillos');
+
+    let animAnillos = lottie.loadAnimation({
+      container: svgContainerAnillos,
+      renderer: 'svg',
+      loop: true,
+	  autoplay: true,
+      path: 'src/assets/animations/anim_ceremonia.json'
+    });
+
+    animAnillos.play();
+
+
+    let svgContainerFiesta = document.querySelector('.anim-fiesta');
+
+    let animFiesta = lottie.loadAnimation({
+      container: svgContainerFiesta,
+      renderer: 'svg',
+      loop: true,
+	  autoplay: true,
+      path: 'src/assets/animations/anim_fiesta.json'
+    });
+
+    animFiesta.play();
+  
 </script>

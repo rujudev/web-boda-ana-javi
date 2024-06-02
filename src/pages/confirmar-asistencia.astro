@@ -1,0 +1,163 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const allergens = [
+    "Cereales con gluten", 
+    "Crustáceos", 
+    "Moluscos", 
+    "Pescado", 
+    "Huevos", 
+    "Altramuces", 
+    "Mostaza", 
+    "Cacahuetes", 
+    "Frutos de cáscara", 
+    "Soja", 
+    "Sésamo", 
+    "Apio", "Leche y productos con lácteos (incluida la lactosa)",
+    "Dióxido de azufre sulfitos"
+];
+
+const removeAccents = (str: string) => {
+  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+---
+
+<Layout title="Confirmación de asistencia">
+    <div id="confirmation-card">
+        <h1>Confirmación de asistencia</h1>
+        <small>
+            <p>Por favor, rellena este cuestionario para que podamos contar contigo. Es necesario responder a todas las preguntas, a ser posible, antes del  15/04/2024.</p>
+            <p>El cuestionario debe rellenarse por persona (incluido niños/as y bebés (trona)). ¡Muchas gracias!</p>
+        </small>
+
+        <form>
+            <div id="name-input-container">
+                <label for="name">Nombre y apellidos</label>
+                <input type="text" id="name" name="name"/>
+            </div>
+            <div>
+                <fieldset>
+                    <legend>Autobús</legend>
+                    <div>
+                        <input type="radio" name="confirm-bus-option" id="yes" value="yes">
+                        <label for="confirm-bus-option">Si, voy en autobús</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="confirm-bus-option" id="no" value="no">
+                        <label for="confirm-bus-option">No, voy por mi cuenta</label>
+                    </div>
+                </fieldset>
+            </div>
+            <div>
+                <fieldset>
+                    <legend>Alérgenos</legend>
+                    {
+                        allergens.map(allergen => {
+                            const mappedAllergen = removeAccents(allergen.toLowerCase());
+
+                            return (
+                                <div>
+                                    <input type="checkbox" name=`${mappedAllergen}-checkbox-option` id=`${mappedAllergen}-checkbox-option` value={mappedAllergen} />
+                                    <label for=`${mappedAllergen}-checkbox-option` >{allergen}</label>
+                                </div>
+                            )
+                        })
+                    }
+
+                    <div id="other-option-container"> 
+                        <div>
+                            <input type="checkbox" name="other-allergen-checkbox-option" id="other-allergen-checkbox-option" value="otros">
+                            <label for="other-allergen-checkbox-option">Otros</label>
+                        </div>
+
+                        <input type="text" name="other-allergens" id="other-allergens-input" class="hidden">
+                    </div>
+                </fieldset>
+            </div>
+        </form>
+    </div>
+    <!-- <a href="/">Volver a la página principal</a> -->
+</Layout>
+
+<script>
+    const otherAllergensChecbox = document.querySelector('input[type="checkbox"][name*="other-allergen-checkbox-option"]');
+
+    otherAllergensChecbox.addEventListener('click', function(e) {
+        const otherAllergensInput = document.getElementById('other-allergens-input');
+        const isChecked = otherAllergensChecbox.checked;
+
+        isChecked ? otherAllergensInput.classList.remove('hidden') : otherAllergensInput.classList.add('hidden')
+    })
+</script>
+
+<style is:global>
+    body {
+        height: 100vh;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        color: rgba(129, 148, 139, 1);
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+        padding: 13px 1em;
+        gap: 2em;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    #confirmation-card {
+        & small {
+            font-style: italic;
+            text-wrap: pretty;
+        }
+    }
+
+    #name-input-container,
+    #other-option-container {
+        display: flex;
+        flex-direction: column;
+        gap: .5em;
+    }
+
+    fieldset {
+        border-color: rgba(129, 148, 139, 1);
+        display: flex;
+        flex-direction: column;
+        gap: .5em;
+        text-wrap: pretty;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    input {
+
+        &:not([type="checkbox"]) {
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.40);
+            cursor: pointer;
+            padding: 6px 23px;
+            border: none;
+    
+            transition: all 0.5s 0s ease;
+    
+            &:focus-visible {
+                outline: none;
+                box-shadow: 0px 0px 10px -1px rgba(129, 148, 139, 1);
+            }
+        }
+
+        &[type="checkbox" i] {
+            accent-color: rgba(129, 148, 139, 1);
+        }
+    }
+</style>

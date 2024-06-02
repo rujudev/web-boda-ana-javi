@@ -51,7 +51,7 @@ import CounterCircle from "../components/CounterCircle.astro";
 		</div>
 		<div id="assist-button-container" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
 			<h2>¡Te esperamos!</h2>
-			<a href="#" class="button">Confirmar Asistencia</a>
+			<a href="/confirmar-asistencia" class="button">Confirmar Asistencia</a>
 		</div>
 	</section>
 </Layout>
@@ -236,29 +236,6 @@ import CounterCircle from "../components/CounterCircle.astro";
 		color: #4a6360;
 	}
 
-	swiper-slide {
-		padding-bottom: 50px;
-
-		& .img-container {
-			box-shadow: 0px 0px 5px -1px rgba(0,0,0,0.40);
-			background-color: #eee;
-			padding: 15px;
-			padding-bottom: 100px;
-			transition: all 0.5s 0s ease;
-			
-			& img {
-				width: 100%;
-				object-fit: cover;
-			}
-		}
-
-		&.swiper-slide-active {
-			& .img-container {
-				background-color: #fff;
-			}
-		}
-	}
-
 	.circle {
 		box-shadow: 0px 0px 15px -1px rgba(0,0,0,0.4);
 		background-color: #fff;
@@ -274,8 +251,7 @@ import CounterCircle from "../components/CounterCircle.astro";
 </style>
 
 <script>
-	// register Swiper custom elements
-	register();
+	import lottie from 'lottie-web';
 
 	document.addEventListener("scroll", function () {
 		const parallaxPortada = document.getElementById("parallax-portada");
@@ -285,43 +261,6 @@ import CounterCircle from "../components/CounterCircle.astro";
 		const scrollYParallaxImg = window.scrollY * 0.6 - 90;
 		parallaxPortadaImg.style.transform = `translate3d(0px, ${scrollYParallaxImg}px, 0px)`;
 	});
-
-	// // swiper element
-	// const swiperEl = document.querySelector("swiper-container");
-
-	// // swiper parameters
-	// const swiperParams = {
-	// 	loop: true,
-	// 	slidesPerView: 1,
-	// 	injectStyles: [
-	// 		`
-	// 			.swiper-pagination {
-	// 				display: flex;
-	// 				align-items: center;
-	// 				justify-content: center;
-					
-	// 				& .swiper-pagination-bullet-active {
-	// 					background-color: #4a6360;
-	// 					width: 10px;
-	// 					height: 10px;
-	// 					transition: width 0.5s ease, height 0.5s ease;
-	// 				}
-	// 			}
-	// 		`,
-	// 	],
-	// 	breakpoints: {
-    //     768: {
-    //       slidesPerView: 3,
-    //       spaceBetween: 20,
-    //     },
-    //   },
-	// };
-
-	// // now we need to assign all parameters to Swiper element
-	// Object.assign(swiperEl, swiperParams);
-
-	// // and now initialize it
-	// swiperEl.initialize();
 
 	// Animación anillos
 	let svgContainerAnillos = document.querySelector('.anim-anillos');

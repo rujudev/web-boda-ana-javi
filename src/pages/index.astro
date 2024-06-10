@@ -6,10 +6,11 @@ import CounterCircle from "../components/CounterCircle.astro";
 
 <Layout title="Invitación boda Ana & Javier">
 	<div id="parallax-portada">
-		<img src="/src/assets/imgs/portada-1.webp" />
+		<img src="/src/assets/imgs/portada_2.webp" />
 	</div>
 	<FirstSection />
 	<section id="second-section">
+		<img src="/src/assets/imgs/separator.svg" id="separator" />
 		<CounterCircle />
 	</section>
 	<section id="ceremony-section">
@@ -20,7 +21,7 @@ import CounterCircle from "../components/CounterCircle.astro";
 			</div>
 			<div class="hour">
 				<h6>Hora</h6>
-				<span>12:00h</span>
+				<span>12:00H</span>
 			</div>
 			<div class="address">
 				<h6>Lugar</h6>
@@ -38,7 +39,7 @@ import CounterCircle from "../components/CounterCircle.astro";
 			</div>
 			<div class="hour">
 				<h6>Hora</h6>
-				<span>13:00h</span>
+				<span>13:00H</span>
 			</div>
 			<div class="address">
 				<h6>Lugar</h6>
@@ -63,11 +64,11 @@ import CounterCircle from "../components/CounterCircle.astro";
 		left: 0;
 		overflow: hidden;
 		width: 100vw;
-		height: calc(100% + 300px);
+		height: calc(100% + 150px);
 
 		& img {
 			object-fit: cover;
-			transform: translate3d(0px, -90px, 0px);
+			transform: translate3d(0px, -20px, 0px);
 			position: absolute;
 			width: 100%;
 			height: 100%;
@@ -90,6 +91,51 @@ import CounterCircle from "../components/CounterCircle.astro";
 		height: 250px;
 		display: flex;
 		justify-content: center;
+
+		& #counter-container {
+			z-index:12;
+		}
+
+		& #separator {
+			position: absolute;
+			top: -50px;
+
+			@media (min-width: 580px) {
+				& {
+					top: -100px;
+				}
+			}
+
+			@media (min-width: 1080px) {
+				& {
+					top: -150px;
+				}
+			}
+
+			@media (min-width: 1720px) {
+				& {
+					top: -200px;
+				}
+			}
+
+			@media (min-width: 2290px) {
+				& {
+					top: -250px;
+				}
+			}
+
+			@media (min-width: 2875px) {
+				& {
+					top: -280px;
+				}
+			}
+
+			@media (min-width: 3225px) {
+				& {
+					top: -300px;
+				}
+			}
+		}
 	}
 
 	#ceremony-section {
@@ -109,6 +155,18 @@ import CounterCircle from "../components/CounterCircle.astro";
 				grid-template-areas: "ceremony . party"
 									 "confirm-assist confirm-assist confirm-assist";
 				justify-content: center;
+			}
+		}
+
+		@media (min-width: 2290px) {
+			& {
+				margin-top: 50px;
+			}
+		}
+
+		@media (min-width: 2875px) {
+			& {
+				margin-top: 120px;
 			}
 		}
 
@@ -176,6 +234,12 @@ import CounterCircle from "../components/CounterCircle.astro";
 				}
 			}
 
+			& .hour {
+				& span {
+					font-family: FireSansExtralight;
+				}
+			}
+
 			& .hour,
 			& .address {
 				text-align: center;
@@ -233,12 +297,24 @@ import CounterCircle from "../components/CounterCircle.astro";
 <script>
 	import lottie from 'lottie-web';
 
+	const parallaxPortada = document.getElementById("parallax-portada");
+	const parallaxPortadaImg = parallaxPortada.querySelector("img");
+	const secondSectionImage = document.querySelector('#second-section #separator');
+
+	const xxlQuery = window.matchMedia( '(min-width: 1920px)' );
+
+	xxlQuery.addEventListener('change', function(e) {
+		let src = `/src/assets/imgs/`;
+
+		e.matches
+			? parallaxPortadaImg.src = src + 'portada.webp'
+			: parallaxPortadaImg.src = src + 'portada_2.webp';
+	});
+
 	document.addEventListener("scroll", function () {
-		const parallaxPortada = document.getElementById("parallax-portada");
 		parallaxPortada.style.transform = `translate3d(0px, ${window.scrollY * -1}px, 0px)`;
 
-		const parallaxPortadaImg = parallaxPortada.querySelector("img");
-		const scrollYParallaxImg = window.scrollY * 0.6 - 90;
+		const scrollYParallaxImg = window.scrollY * 0.5 - 20;
 		parallaxPortadaImg.style.transform = `translate3d(0px, ${scrollYParallaxImg}px, 0px)`;
 	});
 

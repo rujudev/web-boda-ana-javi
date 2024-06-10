@@ -23,11 +23,12 @@ const removeAccents = (str: string) => {
 ---
 
 <Layout title="Confirmación de asistencia">
+    <h1>Confirmación de asistencia</h1>
+
     <div id="confirmation-card">
-        <h1>Confirmación de asistencia</h1>
         <small>
-            <p>Por favor, rellena este cuestionario para que podamos contar contigo. Es necesario responder a todas las preguntas, a ser posible, antes del  15/04/2024.</p>
-            <p>El cuestionario debe rellenarse por persona (incluido niños/as y bebés (trona)). ¡Muchas gracias!</p>
+            <p>Por favor, rellena este cuestionario para que podamos contar contigo. Es necesario responder a todas las preguntas, a ser posible, antes del <span id="date">15/04/2024</span>.</p>
+            <p>El cuestionario debe rellenarse por persona <b>(incluido niños/as y bebés (trona))</b>. <span id="thank">¡Muchas gracias!</span></p>
         </small>
 
         <form>
@@ -75,7 +76,10 @@ const removeAccents = (str: string) => {
                 </fieldset>
             </div>
         </form>
+
+        <button class="button">Enviar confirmación</button>
     </div>
+
     <!-- <a href="/">Volver a la página principal</a> -->
 </Layout>
 
@@ -86,7 +90,12 @@ const removeAccents = (str: string) => {
         const otherAllergensInput = document.getElementById('other-allergens-input');
         const isChecked = otherAllergensChecbox.checked;
 
-        isChecked ? otherAllergensInput.classList.remove('hidden') : otherAllergensInput.classList.add('hidden')
+        if (isChecked) {
+            otherAllergensInput.classList.remove('hidden');
+            otherAllergensInput.setAttribute('value', '');
+        } else {
+            otherAllergensInput.classList.add('hidden');
+        }
     })
 </script>
 
@@ -102,20 +111,33 @@ const removeAccents = (str: string) => {
     main {
         display: flex;
         flex-direction: column;
-        padding: 13px 1em;
-        gap: 2em;
+        align-items: center;
+        padding-inline: 1em;
     }
 
     form {
         display: flex;
         flex-direction: column;
-        gap: 1em;
+        gap: 1.5em;
+        max-width: 450px;
     }
 
     #confirmation-card {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2em;
+
         & small {
             font-style: italic;
             text-wrap: pretty;
+
+            & #date,
+            & #thank {
+                font-size: 1.3em;
+                font-weight: bolder;
+            }
         }
     }
 
@@ -136,6 +158,10 @@ const removeAccents = (str: string) => {
 
     .hidden {
         display: none;
+    }
+
+    .button {
+        width: fit-content;
     }
 
     input {

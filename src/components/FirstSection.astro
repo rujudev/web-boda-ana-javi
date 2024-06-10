@@ -1,4 +1,6 @@
 <section id="fron-page-section">
+    <div id="left-top-flower"></div>
+    <div id="right-middle-flower"></div>
     <div id="couple-names-container">
         <div id="couple-names">
             <span class="name">Ana</span>
@@ -8,10 +10,36 @@
     </div>
 </section>
 
+<script>
+    import lottie from 'lottie-web';
+
+    const leftTopFlower = document.querySelector('#left-top-flower');
+    const rightMiddleFlower = document.querySelector('#right-middle-flower');
+
+    let animLeftTopFlower = lottie.loadAnimation({
+      container: leftTopFlower,
+      renderer: 'svg',
+      loop: false,
+	  autoplay: true,
+      path: 'src/assets/animations/hojas_top_flower.json'
+    });
+    
+    let animRightMiddleFlower = lottie.loadAnimation({
+        container: rightMiddleFlower,
+        renderer: 'svg',
+        loop: false,
+        autoplay: true,
+        path: 'src/assets/animations/hojas_right_middle_flower.json'
+    });
+
+    animLeftTopFlower.play()
+    animRightMiddleFlower.play()
+</script>
+
 <style>
     section {
         position: relative;
-        height: calc(100vh + 300px);
+        height: calc(100vh + 150px);
     }
 
     section::before {
@@ -23,6 +51,21 @@
         z-index: 0;
         top: 0;
         left: 0;
+    }
+
+    #left-top-flower {
+        position: absolute;
+        top: -30px;
+        left: 0;
+        width: 200px;
+    }
+
+    #right-middle-flower {
+        position: absolute;
+        bottom: 20%;
+        right: 0;
+        width: calc(30% + 100px);
+        max-width: 300px;
     }
 
     #couple-names-container {

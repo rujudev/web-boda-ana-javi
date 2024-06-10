@@ -432,14 +432,73 @@
                 </g>
             </svg>
         </div>
-        <div id="counter-date-container">
-            <span id="days">40</span>
-            <span id="hours">18</span>
-            <span id="minutes">10</span>
-            <span id="seconds">30</span>
+        <div id="circle-container">
+            <span id="circle-container-title">Faltan</span>
+            <div id="counter-date-container">
+                <span id="days">40</span>
+                <span id="hours">18</span>
+                <span id="minutes">10</span>
+                <span id="seconds">30</span>
+            </div>
+            <div id="anim-heart-container">
+                <div id="anim-heart"></div>
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+    import lottie from 'lottie-web';
+
+    const daysContainer = document.getElementById('days');
+    const hoursContainer = document.getElementById('hours');
+    const minutesContainer = document.getElementById('minutes');
+    const secondsContainer = document.getElementById('seconds');
+
+    addEventListener('DOMContentLoaded', function() {
+        const countdownDate = new Date('October 5, 2024 12:00:00').getTime();
+
+        const countdownInterval = setInterval(() => {
+            // Obtener la fecha y hora actual
+            const now = new Date().getTime();
+            
+            // Calcular la distancia entre la fecha actual y la fecha de cuenta regresiva
+            const distance = countdownDate - now;
+            
+            // Calcular el tiempo restante en días, horas, minutos y segundos
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // Mostrar el resultado en el elemento con id="countdown"
+            daysContainer.innerHTML = `${days}`;
+            hoursContainer.innerHTML = `${hours}`;
+            minutesContainer.innerHTML = `${minutes}`;
+            secondsContainer.innerHTML = `${seconds}`;
+
+            
+            // Si la cuenta regresiva ha terminado, mostrar un mensaje
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("countdown").innerHTML = "¡Cuenta regresiva terminada!";
+            }
+        }, 1000);
+
+    })
+
+    let svgAnimHeartContainer = document.querySelector('#anim-heart');
+
+    let animAnillos = lottie.loadAnimation({
+    container: svgAnimHeartContainer,
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: 'src/assets/animations/anim_corazon_tiempo.json'
+    });
+
+    animAnillos.play();
+</script>
 
 <style>
     #counter-container {
@@ -459,44 +518,93 @@
         z-index: 1;
     }
 
-    #counter-date-container {
+    #circle-container {
         position: absolute;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr max-content 1fr;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        border-radius: 50%;
+        gap: 1.5em;
+        width: 70%;
+        height: 70%;
+        background-color: #fff;
+        box-shadow: 0px 0px 15px -1px rgba(0, 0, 0, 0.4);
+
+        & > span {
+            font-family: 'Open Sans', sans-serif;
+            color: #BFA880;
+            font-weight: 300;
+            font-size: 40px;
+        }
+
+        & #circle-container-title {
+            height: 100%;
+            display: flex;
+            align-items: end;
+            justify-content: center;
+        }
+
+        & #anim-heart-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: start;
+
+            & #anim-heart {
+                width: 75px;
+            }
+        }
+
+    }
+
+    #counter-date-container {
+        font-family: 'Open Sans', sans-serif;
         top: 4.3em;
         display: grid;
+        font-weight: 700;
         grid-template-columns: repeat(4, 1fr);
         justify-content: center;
         align-items: center;
-        border-radius: 50%;
-        background-color: #fff;
-        box-shadow: 0px 0px 15px -1px rgba(0, 0, 0, 0.4);
-        width: 70%;
-        height: 70%;
+        width: 100%;
+        height: fit-content;
 
         & > span {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            font-size: 35px;
+            color: #868686;
 
             &:nth-child(n + 2) {
                 border-left: 1px solid;
+            }
+
+            &::after {
+                font-family: 'Open Sans', sans-serif;
+                font-size: 20px;
+                color: #BFA880;
             }
         }
     }
 
     #days::after {
-        content: "Días";
+        content: "días";
     }
 
     #hours::after {
-        content: "Días";
+        content: "hs";
     }
 
     #minutes::after {
-        content: "Días";
+        content: "min";
     }
 
     #seconds::after {
-        content: "Días";
+        content: "seg";
     }
 </style>

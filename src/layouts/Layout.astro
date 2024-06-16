@@ -15,8 +15,6 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-
-		<script src="https://cdnjs.com/libraries/bodymovin" type="text/javascript"></script>
 	</head>
 	<body>
 		<main>
@@ -99,6 +97,16 @@ const { title } = Astro.props;
 		text-wrap: pretty;
 	}
 
+	h6 {
+		font-size: 25px;
+		margin: 0 0 .5em 0;
+	}
+
+	h6, #ceremony-section {
+		font-family: 'Open Sans', sans-serif;
+		color: #81948B;
+	}
+
 	.button {
 		all: unset;
 		text-align: center;
@@ -111,6 +119,7 @@ const { title } = Astro.props;
 		text-transform: uppercase;
 		font-weight: 700;
 		font-family: 'Open Sans', sans-serif;
+		color: #81948B;
 
 		transition: all 0.5s 0s ease;
 

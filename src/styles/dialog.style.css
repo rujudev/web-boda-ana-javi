@@ -1,0 +1,70 @@
+h6 {
+    font-size: 25px;
+    margin: 0 0 .5em 0;
+    font-family: 'Open Sans', sans-serif;
+    color: #81948B;
+}
+
+dialog {
+    overflow: initial;
+    width: 100%;
+    border: none;
+    max-width: 800px;
+    border-radius: 10px;
+    
+    &[open] {
+        display: grid;
+        grid-template-rows: max-content 1fr max-content;
+        grid-template-columns: 1fr;
+    }
+
+    &:not([open]) {
+        display: none;
+    }
+
+    &::backdrop {
+        background-color: rgba(74, 99, 96, .9);
+    }
+
+    iframe {
+        width: 100%;
+    }
+
+    h6 {
+        text-align: center;
+        padding-block: 20px;
+
+    }
+
+    & .close {
+        display: flex;
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        padding: 0 !important;
+        background-color: #81948B !important;
+        
+        &:hover {
+            background-color: #fff !important;
+
+            & svg path {
+                stroke: #81948B !important;
+            }
+        }
+
+        & svg {
+            width: 30px;
+            height: 30px;
+
+            & path {
+                transition: all 0.5s 0s ease;
+                stroke: #fff !important;
+            }
+        }
+    }
+
+    & a.button {
+        width: fit-content;
+        margin: 20px auto 0;
+    }
+}

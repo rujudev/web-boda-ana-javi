@@ -1,0 +1,147 @@
+#ceremony-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: "ceremony"
+                         "party"
+                         "confirm-assist";		
+    row-gap: 2em;
+    column-gap: 5em;
+
+    @media (min-width: 590px) {
+        & {
+            grid-template-columns: max-content max-content;
+            grid-template-areas: "ceremony . party"
+                                 "confirm-assist confirm-assist confirm-assist";
+            justify-content: center;
+        }
+    }
+
+    @media (min-width: 2290px) {
+        & {
+            margin-top: 50px;
+        }
+    }
+
+    @media (min-width: 2875px) {
+        & {
+            margin-top: 120px;
+        }
+    }
+
+    & #ring-container {
+        grid-area: ceremony;
+    }
+
+    & #party-container {
+        grid-area: party;
+    }
+
+    & #assist-button-container {
+        grid-area: confirm-assist;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+
+    & #ring-container,
+    & #party-container {
+        max-width: 580px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        & .ceremony-title-container,
+        & .party-title-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+
+            & h2 {
+                font-family: 'CookieRegular', system-ui;
+                font-size: 35px;
+                color: #fff;
+                background-color: #81948B;
+                padding: 8px 30px;			
+            }
+
+            &::before,
+            &::after {
+                position: absolute;
+                z-index: -1;
+            }
+
+            &::before {
+                content: "";
+                width: 100%;
+                left: -20px;
+                background-color: #81948B;
+                border-top: 20px solid transparent;
+                border-left: 20px solid #faf7f3;
+                border-bottom: 20px solid transparent;
+            }
+            
+            &::after {
+                content: "";
+                width: 100%;
+                right: -20px;
+                background-color: #81948B;
+                border-top: 20px solid transparent;
+                border-right: 20px solid #faf7f3;
+                border-bottom: 20px solid transparent;
+            }
+        }
+
+        & .hour {
+            & span {
+                font-family: FireSansExtralight;
+            }
+        }
+
+        & .hour,
+        & .address {
+            text-align: center;
+        }
+
+        & .address {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            margin-top: 3em;
+
+            & h6 {
+                margin: 0;
+            }
+        }
+
+    }
+
+    & span {
+        font-weight: 400;
+        font-size: 18px;
+
+        &.site-name {
+            text-transform: uppercase;
+        }
+    }
+}
+
+.title {
+    font-family: CookieRegular, system-ui;
+    text-align: center;
+    font-size: 60px;
+    color: #4a6360;
+}
+
+.circle {
+    box-shadow: 0px 0px 15px -1px rgba(0,0,0,0.4);
+    background-color: #fff;
+    border-radius: 50%;
+    padding: 1em;
+}
+
+.anim-anillos,
+.anim-fiesta  {
+    width: 125px;
+    height: 125px;
+}

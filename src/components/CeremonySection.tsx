@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import Dialog, { dialogEnum } from './dialog/Dialog';
 import lottie from 'lottie-web';
@@ -47,10 +46,7 @@ const CeremonySection = () => {
         setDialogType(type)
 
         if (dialog) {
-            const dialogAttributes = dialog.attributes;
-            const openAttribute = document.createAttribute('open')
-
-            !dialog.open && dialogAttributes.setNamedItem(openAttribute)
+            dialog.showModal();
         }
     }
 
@@ -95,7 +91,6 @@ const CeremonySection = () => {
                             <span className="site-name"><b>Quinta Lacy</b></span>
                             <span className="site-address">Av. San Luis de Cuba, 1, Elda, Alicante</span>
                         </div>
-                        {/* <a href="https://maps.app.goo.gl/xQHDi6eHjVE3hsvf7" className="button"  data-dialog_type={dialogEnum.HOW_TO_GET_CEREMONY}>¿Cómo llegar?</a> */}
                         <button id="celebration-address-button" className="button" onClick={() => toggleOpenDialog(dialogEnum.HOW_TO_GET_CELEBRATION)}>¿Cómo llegar?</button>
                     </div>
                 </div>
@@ -103,9 +98,8 @@ const CeremonySection = () => {
                     <h2>¡Te esperamos!</h2>
                     <button id="confirm-assist-button" className="button" onClick={() => toggleOpenDialog(dialogEnum.CONFIRM_ASSIST)}>Confirmar Asistencia</button>
                 </div>
-            <Dialog type={dialogType} ref={dialogRef} />
             </section>
-
+            <Dialog type={dialogType} ref={dialogRef} />
         </>
     )
 }

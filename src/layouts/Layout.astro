@@ -19,21 +19,23 @@ const { title } = Astro.props;
 	<body>
 		<main>
 			<slot />
+			<footer>
+				<h1>¿Alguna duda? ¡Contacta con nosotros!</h1>
+				<div id="tel-info-container">
+					<div class="tel-info">
+						<span class="name">Javier</span>
+						<span class="tel"><a href="tel:+34664146132">664146132</a></span>
+					</div>
+					<div class="tel-info">
+						<span class="name">Ana</span>
+						<span class="tel"><a href="tel:+34639526033">639526033</a></span>
+					</div>
+				</div>
+			</footer>
 		</main>
 	</body>
-	<footer>
-		<h1>¿Alguna duda? ¡Contacta con nosotros!</h1>
-		<div id="tel-info-container">
-			<div class="tel-info">
-				<span class="name">Javier</span>
-				<span class="tel"><a href="tel:+34664146132">664146132</a></span>
-			</div>
-			<div class="tel-info">
-				<span class="name">Ana</span>
-				<span class="tel"><a href="tel:+34639526033">639526033</a></span>
-			</div>
-		</div>
-	</footer>
+	<dialog>ñakldjsñfkadf</dialog>
+	
 </html>
 <style is:global>
 	@font-face {

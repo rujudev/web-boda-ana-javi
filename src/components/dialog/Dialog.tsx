@@ -1,4 +1,4 @@
-import React, { type FC, forwardRef, useRef } from 'react';
+import React, { type FC, forwardRef } from 'react';
 import HowToGetContent from './HowToGetContent';
 import ConfirmAssistContent from './ConfirmAssistContent';
 import "../../styles/dialog.style.css"

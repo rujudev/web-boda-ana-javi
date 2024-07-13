@@ -19,7 +19,7 @@ const CeremonySection = () => {
                 renderer: 'svg',
                 loop: true,
                 autoplay: true,
-                path: 'src/assets/animations/anim_ceremonia.json'
+                path: '../public/assets/animations/anim_ceremonia.json'
             });
 
             animAnillos.play();
@@ -35,7 +35,7 @@ const CeremonySection = () => {
                 renderer: 'svg',
                 loop: true,
                 autoplay: true,
-                path: 'src/assets/animations/anim_fiesta.json'
+                path: '../public/assets/animations/anim_fiesta.json'
             });
 
             animFiesta.play();
@@ -51,7 +51,7 @@ const CeremonySection = () => {
                 renderer: 'svg',
                 loop: false,
                 autoplay: true,
-                path: 'src/assets/animations/hojas_top_celebration_section.json'
+                path: '../public/assets/animations/hojas_top_celebration_section.json'
             });
 
             animTopLeftFlowers.play();
@@ -67,7 +67,7 @@ const CeremonySection = () => {
                 renderer: 'svg',
                 loop: false,
                 autoplay: true,
-                path: 'src/assets/animations/hojas_bottom_right_celebration_section.json'
+                path: '../public/assets/animations/hojas_bottom_right_celebration_section.json'
             });
 
             animRightBottomFlowers.play();

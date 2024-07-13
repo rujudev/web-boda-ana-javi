@@ -1,8 +1,25 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
+const allergens = [
+    "Cereales con gluten", 
+    "Crustáceos", 
+    "Moluscos", 
+    "Pescado", 
+    "Huevos", 
+    "Altramuces", 
+    "Mostaza", 
+    "Cacahuetes", 
+    "Frutos de cáscara", 
+    "Soja", 
+    "Sésamo", 
+    "Apio", "Leche y productos con lácteos (incluida la lactosa)",
+    "Dióxido de azufre sulfitos"
+];
 
-
+const removeAccents = (str: string) => {
+  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
 
 ---
 

@@ -7,11 +7,11 @@ import CeremonySection from "../components/CeremonySection";
 
 <Layout title="Invitación boda Ana & Javier">
 	<div id="parallax-portada">
-		<img src="../public/assets/imgs/portada_2.webp" />
+		<img src="../assets/imgs/portada_2.webp" />
 	</div>
 	<FirstSection />
 	<section id="second-section">
-		<img src="../public/assets/imgs/separator.svg" id="separator" />
+		<img src="../assets/imgs/separator.svg" id="separator" />
 		<CounterCircle />
 	</section>
 	<CeremonySection client:load />
@@ -23,7 +23,7 @@ import CeremonySection from "../components/CeremonySection";
 	const xxlQuery = window.matchMedia("(min-width: 1920px)");
 
 	xxlQuery.addEventListener("change", function (e) {
-		let src = `/src/assets/imgs/`;
+		let src = `../assets/imgs/`;
 
 		e.matches
 			? (parallaxPortadaImg.src = src + "portada.webp")

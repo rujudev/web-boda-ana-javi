@@ -1,25 +1,190 @@
 h6 {
     font-size: 25px;
-    margin: 0 0 .5em 0;
+    margin: 0;
     font-family: 'Open Sans', sans-serif;
+}
+
+label {
+    font-size: 18px;
+}
+
+legend,
+#name-input-container {
     color: #81948B;
 }
 
 dialog {
     overflow: initial;
-    width: 100%;
     border: none;
-    max-width: 800px;
     border-radius: 10px;
-    
-    &[open] {
-        display: grid;
-        grid-template-rows: max-content 1fr max-content;
-        grid-template-columns: 1fr;
+    background-color: #faf7f3;
+
+    @media (min-width: 879px) {
+        & {
+            width: 100%;
+            max-width: 800px;
+        }
     }
 
-    &:not([open]) {
-        display: none;
+    &[open] {
+        display: grid;
+        margin: 1em;
+    }
+
+    &.confirm-assist {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        max-height: calc(100vh - 4em);
+
+        & #bus-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            & #bus-confirmation {
+                display: grid;
+                gap: 2em;
+
+                @media (min-width: 400px) {
+                    & {
+                        grid-template-columns: max-content max-content;
+                    }
+                }
+            }
+        }
+
+        & #allergen-container {
+            display: flex;
+            flex-direction: column;
+            gap: .5em;
+
+            & #allergen-list-container {
+                display: grid;
+                justify-content: space-between;
+                row-gap: .5em;
+
+                @media (min-width: 625px) {
+                    & {
+                        grid-template-columns: repeat(2, max-content);
+                    }
+                }
+
+                @media (min-width: 775px) {
+                    & {
+                        grid-template-columns: repeat(3, max-content);
+                    }
+                }
+            }
+        }
+
+        & small {
+            font-family: 'CormorantGaramondMedium';
+            text-wrap: pretty;
+            font-size: 1em;
+
+            & #date {
+                font-weight: bolder;
+            }
+        }
+
+        #name-input-container {
+            margin-inline: 1px;
+        }
+
+        #name-input-container,
+        #other-option-container {
+            display: flex;
+            flex-direction: column;
+            gap: .5em;
+        }
+
+        fieldset {
+            border-color: rgba(129, 148, 139, 1);
+            display: flex;
+            flex-direction: column;
+            gap: .5em;
+            text-wrap: pretty;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            overflow-x: auto;
+
+            & h6 {
+                font-size: 20px;
+            }
+        }
+
+        & .hidden {
+            display: none;
+        }
+
+        & .button {
+            width: fit-content;
+            margin: 0 auto;
+
+            &:disabled {
+                cursor: none;
+                pointer-events: none;
+            }
+        }
+
+        & .loading {
+            position: relative;
+            color: #faf7f3;
+            background-color: rgba(129, 148, 139, .5);
+            transition: all 1s ease;
+
+            &::after {
+                content: '';
+                position: absolute;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                left: 0;
+                right: 0;
+                top: 7px;
+                margin: 0 auto;
+                width: 30px;
+                height: 30px;
+                border: 3px solid #FFF;
+                border-bottom-color: #81948B;
+                border-radius: 50%;
+                display: inline-block;
+                box-sizing: border-box;
+                animation: rotation 1s linear infinite;
+            }
+        }
+
+        & .toast {
+            position: absolute;
+        }
+
+        input {
+            transition: all 0.5s 0s ease;
+
+            &:not([type="checkbox"]) {
+                border-radius: 5px;
+                background-color: #fff;
+                box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.40);
+                cursor: pointer;
+                padding: 6px 23px;
+                border: none;
+
+                &:focus-visible {
+                    outline: none;
+                    box-shadow: 0px 0px 10px -1px rgba(129, 148, 139, 1);
+                }
+            }
+
+            &[type="checkbox" i],
+            &[type="radio" i] {
+                accent-color: rgba(129, 148, 139, 1);
+            }
+        }
     }
 
     &::backdrop {
@@ -43,7 +208,7 @@ dialog {
         right: -10px;
         padding: 0 !important;
         background-color: #81948B !important;
-        
+
         &:hover {
             background-color: #fff !important;
 
@@ -66,5 +231,15 @@ dialog {
     & a.button {
         width: fit-content;
         margin: 20px auto 0;
+    }
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
     }
 }

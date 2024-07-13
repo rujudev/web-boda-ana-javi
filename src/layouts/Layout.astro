@@ -1,4 +1,5 @@
 ---
+import { supabaseClient } from "../db/config";
 interface Props {
 	title: string;
 }
@@ -13,29 +14,30 @@ const { title } = Astro.props;
 		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link href="../../node_modules/node-snackbar/dist/snackbar.min.css" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
 	<body>
 		<main>
 			<slot />
-			<footer>
-				<h1>¿Alguna duda? ¡Contacta con nosotros!</h1>
-				<div id="tel-info-container">
-					<div class="tel-info">
-						<span class="name">Javier</span>
-						<span class="tel"><a href="tel:+34664146132">664146132</a></span>
-					</div>
-					<div class="tel-info">
-						<span class="name">Ana</span>
-						<span class="tel"><a href="tel:+34639526033">639526033</a></span>
-					</div>
-				</div>
-			</footer>
 		</main>
 	</body>
-	<dialog>ñakldjsñfkadf</dialog>
-	
+	<footer>
+		<h1>¿Alguna duda? ¡Contacta con nosotros!</h1>
+		<div id="tel-info-container">
+			<div class="tel-info">
+				<span class="name">Javier</span>
+				<span class="tel"><a href="tel:+34664146132">664146132</a></span
+				>
+			</div>
+			<div class="tel-info">
+				<span class="name">Ana</span>
+				<span class="tel"><a href="tel:+34639526033">639526033</a></span
+				>
+			</div>
+		</div>
+	</footer>
 </html>
 <style is:global>
 	@font-face {
@@ -57,7 +59,7 @@ const { title } = Astro.props;
 		font-family: FireSansLight;
 		src: url(/fonts/FiraSans-Light.ttf);
 	}
-	
+
 	@font-face {
 		font-family: FireSansExtralight;
 		src: url(/fonts/FiraSans-ExtraLight.ttf);
@@ -65,7 +67,7 @@ const { title } = Astro.props;
 
 	html {
 		width: 100vw;
-		height: 100vh;
+		height: 100dvh;
 	}
 
 	body {
@@ -77,23 +79,25 @@ const { title } = Astro.props;
 		font-family: CormorantGaramondMedium, system-ui;
 	}
 
-	section, footer {
+	/* section,
+	footer {
 		padding-inline: 1em;
-	}
+	} */
 
 	footer {
+		padding-inline: 1em;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 		padding-block: 2em;
-		color: #81948B;
+		color: #81948b;
 	}
 
 	h1 {
-		color: #81948B;
+		color: #81948b;
 		text-align: center;
-		font-family: 'CookieRegular', system-ui;
+		font-family: "CookieRegular", system-ui;
 		font-weight: normal;
 		font-size: 3em;
 		text-wrap: pretty;
@@ -101,12 +105,13 @@ const { title } = Astro.props;
 
 	h6 {
 		font-size: 25px;
-		margin: 0 0 .5em 0;
+		margin: 0 0 0.5em 0;
 	}
 
-	h6, #ceremony-section {
-		font-family: 'Open Sans', sans-serif;
-		color: #81948B;
+	h6,
+	#ceremony-section {
+		font-family: "Open Sans", sans-serif;
+		color: #81948b;
 	}
 
 	.button {
@@ -114,19 +119,19 @@ const { title } = Astro.props;
 		text-align: center;
 		border-radius: 50px;
 		background-color: #fff;
-		box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.40);
+		box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.4);
 		cursor: pointer;
 		padding: 13px 30px;
 		border: none;
 		text-transform: uppercase;
 		font-weight: 700;
-		font-family: 'Open Sans', sans-serif;
-		color: #81948B;
+		font-family: "Open Sans", sans-serif;
+		color: #81948b;
 
 		transition: all 0.5s 0s ease;
 
 		&:hover {
-			background-color: #81948B;
+			background-color: #81948b;
 			color: #fff;
 		}
 	}
@@ -135,21 +140,20 @@ const { title } = Astro.props;
 		display: flex;
 		gap: 5em;
 
-		
 		& .tel-info {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			width: fit-content;
-			gap: .5em;
-	
+			gap: 0.5em;
+
 			& .name {
 				font-family: Amsterdam, system-ui;
 				font-size: 30px;
 			}
-	
+
 			& .tel {
-				font-family: 'Open Sans', sans-serif;
+				font-family: "Open Sans", sans-serif;
 			}
 
 			& a {

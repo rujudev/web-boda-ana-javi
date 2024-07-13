@@ -2,44 +2,52 @@
     <div id="left-top-flower"></div>
     <div id="right-middle-flower"></div>
     <div id="couple-names-container">
-        <div id="couple-names">
-            <span class="name">Ana</span>
-            <span id="and">&</span>
-            <span class="name">Javier</span>
+        <div>
+            <div id="couple-names">
+                <span class="name">Ana</span>
+                <span id="and">&</span>
+                <span class="name">Javier</span>
+            </div>
+            <span>05/10/2024</span>
         </div>
     </div>
 </section>
 
 <script>
-    import lottie from 'lottie-web';
+    import lottie from "lottie-web";
 
-    const leftTopFlower = document.querySelector('#left-top-flower');
-    const rightMiddleFlower = document.querySelector('#right-middle-flower');
+    const leftTopFlower = document.querySelector("#left-top-flower");
+    const rightMiddleFlower = document.querySelector("#right-middle-flower");
 
-    let animLeftTopFlower = lottie.loadAnimation({
-      container: leftTopFlower,
-      renderer: 'svg',
-      loop: false,
-	  autoplay: true,
-      path: 'src/assets/animations/hojas_top_flower.json'
-    });
-    
-    let animRightMiddleFlower = lottie.loadAnimation({
-        container: rightMiddleFlower,
-        renderer: 'svg',
-        loop: false,
-        autoplay: true,
-        path: 'src/assets/animations/hojas_right_middle_flower.json'
-    });
+    if (leftTopFlower) {
+        let animLeftTopFlower = lottie.loadAnimation({
+            container: leftTopFlower,
+            renderer: "svg",
+            loop: false,
+            autoplay: true,
+            path: "src/assets/animations/hojas_top_flower.json",
+        });
 
-    animLeftTopFlower.play()
-    animRightMiddleFlower.play()
+        animLeftTopFlower.play();
+    }
+
+    if (rightMiddleFlower) {
+        let animRightMiddleFlower = lottie.loadAnimation({
+            container: rightMiddleFlower,
+            renderer: "svg",
+            loop: false,
+            autoplay: true,
+            path: "src/assets/animations/hojas_right_middle_flower.json",
+        });
+
+        animRightMiddleFlower.play();
+    }
 </script>
 
 <style>
     section {
         position: relative;
-        height: calc(100vh + 150px);
+        height: calc(100dvh + 150px);
     }
 
     section::before {
@@ -57,15 +65,37 @@
         position: absolute;
         top: -30px;
         left: 0;
-        width: 200px;
+        min-width: 150px;
+        max-width: 300px;
+        width: 20%;
+        z-index: 2;
     }
 
     #right-middle-flower {
         position: absolute;
-        bottom: 20%;
+        bottom: 27%;
         right: 0;
-        width: calc(30% + 100px);
-        max-width: 300px;
+        width: 14%;
+        min-width: 200px;
+
+        @media (min-width: 710px) {
+            & {
+                bottom: 20%;
+                min-width: 250px;
+            }
+        }
+
+        @media (min-width: 980px) {
+            & {
+                min-width: 300px;
+            }
+        }
+
+        /* @media (max-width: 800px) {
+            & {
+                display: none;
+            }
+        } */
     }
 
     #couple-names-container {
@@ -77,15 +107,22 @@
     }
 
     #couple-names {
+        width: -webkit-fill-available;
         font-family: Amsterdam, CormorantGaramondMedium, system-ui !important;
-        font-size: 5.5em;
-        padding-bottom: 1.5em;
+        font-size: 3.5em;
+        padding-bottom: 3em;
         position: relative;
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
         color: #eeeeee;
+
+        @media (min-width: 450px) {
+            & {
+                font-size: 5.5em;
+                padding-bottom: 2em;
+            }
+        }
     }
 
     #and {

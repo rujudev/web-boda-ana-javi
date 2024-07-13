@@ -1,18 +1,27 @@
 #ceremony-section {
+    position: relative;
     display: grid;
+    justify-items: center;
     grid-template-columns: 1fr;
     grid-template-areas: "ceremony"
-                         "party"
-                         "confirm-assist";		
-    row-gap: 2em;
-    column-gap: 5em;
+        "party"
+        "confirm-assist";
 
-    @media (min-width: 590px) {
+    column-gap: 5em;
+    row-gap: 5em;
+
+    @media (min-width: 780px) {
         & {
             grid-template-columns: max-content max-content;
-            grid-template-areas: "ceremony . party"
-                                 "confirm-assist confirm-assist confirm-assist";
+            grid-template-areas: "ceremony party"
+                "confirm-assist confirm-assist";
             justify-content: center;
+        }
+    }
+
+    @media (min-width: 850px) {
+        & {
+            column-gap: 10em;
         }
     }
 
@@ -26,6 +35,17 @@
         & {
             margin-top: 120px;
         }
+    }
+
+    & #line-background {
+        z-index: -1;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image: url('../assets/imgs/lineas_background.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: top center;
     }
 
     & #ring-container {
@@ -43,6 +63,25 @@
         justify-content: center;
     }
 
+    & #top-left-flowers,
+    & #right-bottom-flowers {
+        width: 14%;
+        min-width: 175px;
+        position: absolute;
+    }
+
+    & #top-left-flowers {
+        z-index: -1;
+        top: -100px;
+        left: 0;
+    }
+
+    & #right-bottom-flowers {
+        bottom: -80px;
+        right: 0;
+        z-index: -1;
+    }
+
     & #ring-container,
     & #party-container {
         max-width: 580px;
@@ -50,7 +89,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        
+
         & .ceremony-title-container,
         & .party-title-container {
             display: flex;
@@ -62,7 +101,7 @@
                 font-size: 35px;
                 color: #fff;
                 background-color: #81948B;
-                padding: 8px 30px;			
+                padding: 8px 30px;
             }
 
             &::before,
@@ -80,7 +119,7 @@
                 border-left: 20px solid #faf7f3;
                 border-bottom: 20px solid transparent;
             }
-            
+
             &::after {
                 content: "";
                 width: 100%;
@@ -134,14 +173,14 @@
 }
 
 .circle {
-    box-shadow: 0px 0px 15px -1px rgba(0,0,0,0.4);
+    box-shadow: 0px 0px 15px -1px rgba(0, 0, 0, 0.4);
     background-color: #fff;
     border-radius: 50%;
     padding: 1em;
 }
 
 .anim-anillos,
-.anim-fiesta  {
+.anim-fiesta {
     width: 125px;
     height: 125px;
 }

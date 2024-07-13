@@ -1,19 +1,20 @@
+import React from 'react';
 import { dialogEnum } from "./Dialog"
 import "../../styles/dialog.style.css"
 
-const Title = ({ title }: { title: string }) => {
+const Title = ({ title }) => {
     return <h6>{title}</h6>
 }
 
-const Map = ({ url }: { url: string }) => {
+const Map = ({ url }) => {
     return <iframe src={url} width="600" height="450" style={{ border: 0 }} allowFullScreen={true} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
 }
 
-const GoogleMapsLink = ({ url }: { url: string }) => {
+const GoogleMapsLink = ({ url }) => {
     return <a href={url} className="button" target="_blank">¿Cómo llegar?</a>
 }
 
-const HowToGetContent = ({ type }: { type: string }) => {
+const HowToGetContent = ({ type }) => {
     let content = null;
 
     if (type === dialogEnum.HOW_TO_GET_CEREMONY) {
@@ -30,7 +31,7 @@ const HowToGetContent = ({ type }: { type: string }) => {
             mapLinkUrl: 'https://maps.app.goo.gl/xQHDi6eHjVE3hsvf7'
         };
     }
-    
+
     return (
         <>
             {

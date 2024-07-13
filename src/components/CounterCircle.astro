@@ -447,55 +447,150 @@
         </div>
     </div>
 </div>
+<table id="confirmations-table" style="display: none;">
+    <thead>
+        <th>Nombre</th>
+        <th>Alergias</th>
+        <th>Bus</th>
+    </thead>
+    <tbody> </tbody>
+</table>
 
 <script>
-    import lottie from 'lottie-web';
+    import lottie from "lottie-web";
+    import jsPDF from "jspdf";
+    import autoTable from "jspdf-autotable";
+    import { supabaseClient } from "../db/config";
 
-    const daysContainer = document.getElementById('days');
-    const hoursContainer = document.getElementById('hours');
-    const minutesContainer = document.getElementById('minutes');
-    const secondsContainer = document.getElementById('seconds');
+    const daysContainer = document.getElementById("days");
+    const hoursContainer = document.getElementById("hours");
+    const minutesContainer = document.getElementById("minutes");
+    const secondsContainer = document.getElementById("seconds");
 
-    addEventListener('DOMContentLoaded', function() {
-        const countdownDate = new Date('October 5, 2024 12:00:00').getTime();
+    const getRemainingTime = (date: Date) => {
+        const now = new Date().getTime();
+        const remainingTime = date.getTime() - now;
+        const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+            (remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+        );
+        const minutes = Math.floor(
+            (remainingTime % (1000 * 60 * 60)) / (1000 * 60),
+        );
+        const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
 
-        const countdownInterval = setInterval(() => {
+        return { days, hours, minutes, seconds, remainingTime };
+    };
+
+    const createPDF = async () => {
+        const { data, error } = await supabaseClient.from("confirms").select();
+
+        const confirms = data?.map((confirm) => ({
+            ...confirm,
+            with_bus: confirm?.with_bus ? "Si" : "No",
+            allergens: confirm.allergens
+                .map((allergen: String) =>
+                    allergen.padStart(allergen.length + 1, "-      "),
+                )
+                .join("\n"),
+        }));
+
+        const doc = new jsPDF();
+
+        autoTable(doc, {
+            theme: "grid",
+            body: confirms,
+            headStyles: {
+                fillColor: "#81948B",
+            },
+            bodyStyles: {
+                textColor: "black",
+            },
+            columns: [
+                {
+                    header: "Nombre",
+                    dataKey: "name",
+                },
+                {
+                    header: "Alergias",
+                    dataKey: "allergens",
+                },
+                {
+                    header: "Autobús",
+                    dataKey: "with_bus",
+                },
+                {
+                    header: "Opción vegana",
+                    dataKey: "with_bus",
+                },
+            ],
+        });
+
+        //doc.save("confirmaciones.pdf");
+        const resultado = doc.getFileFromVFS("confirmaciones.pdf");
+
+        console.log(resultado);
+    };
+
+    createPDF();
+
+    addEventListener("DOMContentLoaded", async function () {
+        const weddingCountdownDate = new Date("October 5, 2024 12:00:00");
+        const confirmAssistCountdownDate = new Date(
+            "September 1, 2024 00:00:00",
+        );
+
+        const weddingCountdownInterval = setInterval(() => {
             // Obtener la fecha y hora actual
             const now = new Date().getTime();
-            
-            // Calcular la distancia entre la fecha actual y la fecha de cuenta regresiva
-            const distance = countdownDate - now;
-            
-            // Calcular el tiempo restante en días, horas, minutos y segundos
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            // Mostrar el resultado en el elemento con id="countdown"
-            daysContainer.innerHTML = `${days}`;
-            hoursContainer.innerHTML = `${hours}`;
-            minutesContainer.innerHTML = `${minutes}`;
-            secondsContainer.innerHTML = `${seconds}`;
 
-            
+            // Calcular la distancia entre la fecha actual y la fecha de cuenta regresiva
+            const {
+                days: weddingDays,
+                hours: weddingHours,
+                minutes: weddingMinutes,
+                seconds: weddingSeconds,
+                remainingTime: weddingRemainingTime,
+            } = getRemainingTime(weddingCountdownDate);
+
+            // Mostrar el resultado en el elemento con id="countdown"
+            daysContainer.innerHTML = `${weddingDays}`;
+            hoursContainer.innerHTML = `${weddingHours}`;
+            minutesContainer.innerHTML = `${weddingMinutes}`;
+            secondsContainer.innerHTML = `${weddingSeconds}`;
+
             // Si la cuenta regresiva ha terminado, mostrar un mensaje
-            if (distance < 0) {
-                clearInterval(countdownInterval);
-                document.getElementById("countdown").innerHTML = "¡Cuenta regresiva terminada!";
+            if (weddingRemainingTime <= 0) {
+                clearInterval(weddingCountdownInterval);
             }
         }, 1000);
 
-    })
+        const confirmAssistCountdownInterval = setInterval(async () => {
+            const { remainingTime: confirmAssistRemainingTime } =
+                getRemainingTime(confirmAssistCountdownDate);
 
-    let svgAnimHeartContainer = document.querySelector('#anim-heart');
+            if (confirmAssistRemainingTime <= 0) {
+                // const { Resend } = await import('resend');
+                // const resend = new Resend('re_QtL137SQ_DrEDCyuVsm1yXY9sxZfqd4d2')
+
+                // await resend.emails.send({
+                //     from: 'rubenjuanmolinawd@gmail.com',
+                //     to: ['']
+                // })
+
+                clearInterval(confirmAssistCountdownInterval);
+            }
+        }, 1000);
+    });
+
+    let svgAnimHeartContainer = document.querySelector("#anim-heart");
 
     let animAnillos = lottie.loadAnimation({
-    container: svgAnimHeartContainer,
-    renderer: 'svg',
-    loop: true,
-    autoplay: true,
-    path: 'src/assets/animations/anim_corazon_tiempo.json'
+        container: svgAnimHeartContainer,
+        renderer: "svg",
+        loop: true,
+        autoplay: true,
+        path: "src/assets/animations/anim_corazon_tiempo.json",
     });
 
     animAnillos.play();
@@ -535,8 +630,8 @@
         box-shadow: 0px 0px 15px -1px rgba(0, 0, 0, 0.4);
 
         & > span {
-            font-family: 'Open Sans', sans-serif;
-            color: #BFA880;
+            font-family: "Open Sans", sans-serif;
+            color: #bfa880;
             font-weight: 300;
             font-size: 40px;
         }
@@ -559,11 +654,10 @@
                 width: 75px;
             }
         }
-
     }
 
     #counter-date-container {
-        font-family: 'Open Sans', sans-serif;
+        font-family: "Open Sans", sans-serif;
         top: 4.3em;
         display: grid;
         font-weight: 700;
@@ -586,9 +680,9 @@
             }
 
             &::after {
-                font-family: 'Open Sans', sans-serif;
+                font-family: "Open Sans", sans-serif;
                 font-size: 20px;
-                color: #BFA880;
+                color: #bfa880;
             }
         }
     }

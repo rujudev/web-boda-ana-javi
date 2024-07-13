@@ -12,14 +12,17 @@
   },
   "dependencies": {
     "@astrojs/react": "^3.6.0",
+    "@supabase/supabase-js": "^2.43.5",
     "astro": "^4.7.0",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.2",
     "lottie-web": "^5.12.2",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "resend": "^3.4.0"
   },
   "devDependencies": {
-    "@types/react": "^18.3.3",
-    "standard": "^17.1.0"
+    "@types/react": "^18.3.3"
   },
   "eslintConfig": {
     "extends": "standard"

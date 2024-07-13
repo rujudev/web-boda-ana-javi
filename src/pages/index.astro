@@ -2,10 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import FirstSection from "../components/FirstSection.astro";
 import CounterCircle from "../components/CounterCircle.astro";
-import { type DialogType, dialogEnum } from "../components/dialog/Dialog.jsx";
-import CeremonySection from "../components/CeremonySection.tsx";
-
-let type: DialogType = dialogEnum.HOW_TO_GET_CEREMONY;
+import CeremonySection from "../components/CeremonySection";
 ---
 
 <Layout title="Invitación boda Ana & Javier">
@@ -23,14 +20,14 @@ let type: DialogType = dialogEnum.HOW_TO_GET_CEREMONY;
 <script>
 	const parallaxPortada = document.getElementById("parallax-portada");
 	const parallaxPortadaImg = parallaxPortada.querySelector("img");
-	const xxlQuery = window.matchMedia( '(min-width: 1920px)' );
+	const xxlQuery = window.matchMedia("(min-width: 1920px)");
 
-	xxlQuery.addEventListener('change', function(e) {
+	xxlQuery.addEventListener("change", function (e) {
 		let src = `/src/assets/imgs/`;
 
 		e.matches
-			? parallaxPortadaImg.src = src + 'portada.webp'
-			: parallaxPortadaImg.src = src + 'portada_2.webp';
+			? (parallaxPortadaImg.src = src + "portada.webp")
+			: (parallaxPortadaImg.src = src + "portada_2.webp");
 	});
 
 	document.addEventListener("scroll", function () {
@@ -41,71 +38,7 @@ let type: DialogType = dialogEnum.HOW_TO_GET_CEREMONY;
 	});
 </script>
 
-<style>	
-	dialog {
-		overflow: initial;
-		width: 100%;
-		border: none;
-		max-width: 800px;
-		border-radius: 10px;
-		
-		&[open] {
-			display: grid;
-			grid-template-rows: max-content 1fr max-content;
-			grid-template-columns: 1fr;
-		}
-
-		&:not([open]) {
-			display: none;
-		}
-
-		&::backdrop {
-			background-color: rgba(74, 99, 96, .9);
-		}
-
-		iframe {
-			width: 100%;
-		}
-
-		h6 {
-			text-align: center;
-			padding-block: 20px;
-
-		}
-
-		& .close {
-			display: flex;
-			position: absolute;
-			top: -10px;
-			right: -10px;
-			padding: 0 !important;
-			background-color: #81948B !important;
-			
-			&:hover {
-				background-color: #fff !important;
-
-				& svg path {
-					stroke: #81948B !important;
-				}
-			}
-
-			& svg {
-				width: 30px;
-				height: 30px;
-
-				& path {
-					transition: all 0.5s 0s ease;
-					stroke: #fff !important;
-				}
-			}
-		}
-
-		& a.button {
-			width: fit-content;
-			margin: 20px auto 0;
-		}
-	}
-
+<style>
 	#parallax-portada {
 		position: fixed;
 		top: 0;
@@ -136,17 +69,17 @@ let type: DialogType = dialogEnum.HOW_TO_GET_CEREMONY;
 
 	#second-section {
 		position: relative;
-		height: 250px;
+		height: 350px;
 		display: flex;
 		justify-content: center;
 
 		& #counter-container {
-			z-index:12;
+			z-index: 12;
 		}
 
 		& #separator {
 			position: absolute;
-			top: -50px;
+			top: -45px;
 
 			@media (min-width: 580px) {
 				& {

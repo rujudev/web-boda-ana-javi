@@ -488,9 +488,10 @@
         const confirms = data?.map((confirm) => ({
             ...confirm,
             with_bus: confirm?.with_bus ? "Si" : "No",
+            with_vegan_menu: confirm?.with_vegan_menu ? "Si" : "No",
             allergens: confirm.allergens
                 .map((allergen: String) =>
-                    allergen.padStart(allergen.length + 1, "-      "),
+                    allergen.padStart(allergen.length + 1, "- "),
                 )
                 .join("\n"),
         }));
@@ -521,12 +522,12 @@
                 },
                 {
                     header: "Opción vegana",
-                    dataKey: "with_bus",
+                    dataKey: "with_vegan_menu",
                 },
             ],
         });
 
-        //doc.save("confirmaciones.pdf");
+        doc.save("confirmaciones.pdf");
         const resultado = doc.getFileFromVFS("confirmaciones.pdf");
 
         console.log(resultado);
@@ -570,13 +571,15 @@
                 getRemainingTime(confirmAssistCountdownDate);
 
             if (confirmAssistRemainingTime <= 0) {
-                // const { Resend } = await import('resend');
-                // const resend = new Resend('re_QtL137SQ_DrEDCyuVsm1yXY9sxZfqd4d2')
+                const { Resend } = await import("resend");
+                const resend = new Resend(
+                    "re_QtL137SQ_DrEDCyuVsm1yXY9sxZfqd4d2",
+                );
 
-                // await resend.emails.send({
-                //     from: 'rubenjuanmolinawd@gmail.com',
-                //     to: ['']
-                // })
+                await resend.emails.send({
+                    from: "rubenjuanmolinawd@gmail.com",
+                    to: ["javi.buendia93@gmail.com", "pinacanicio@gmail.com"],
+                });
 
                 clearInterval(confirmAssistCountdownInterval);
             }

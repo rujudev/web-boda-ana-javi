@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { supabaseClient } from "../../db/config";
+import 'animate.css';
 
 const ConfirmAssistContent = () => {
     const otherAllergenInputRef = useRef(null);
@@ -37,9 +38,6 @@ const ConfirmAssistContent = () => {
 
         const button = submitButtonRef.current;
 
-        button.disabled = true;
-        button.classList.add('loading');
-
         const form = event.target;
 
         const formData = new FormData(form)
@@ -47,37 +45,72 @@ const ConfirmAssistContent = () => {
         let assistant = {
             name: formData.get('name'),
             with_bus: formData.get('confirm-bus-option') === 'yes',
+            with_vegan_menu: formData.get('confirm-vegan-option') === 'yes',
             allergens: [],
         }
 
-        // for (const [key, value] of formData) {
-        //     if (value) {
-        //         if (key.includes('allergen-option')) {
-        //             assistModelObject = {
-        //                 ...assistModelObject,
-        //                 allergens: [
-        //                     ...assistModelObject.allergens,
-        //                     value
-        //                 ]
-        //             }
-        //         }
-        //     }
-        // }
+        for (const [key, value] of formData) {
+            if (value) {
+                if (key.includes('allergen-option')) {
+                    assistant = {
+                        ...assistant,
+                        allergens: [
+                            ...assistant.allergens,
+                            value
+                        ]
+                    }
+                }
+            }
+        }
 
-        // const { error } = await supabaseClient.from('confirms').insert(assistModelObject);
+        const submitButton = document.querySelector('button[form=confirm-assist-form]');
+        submitButton.classList.add('sending');
+        const sendConfirmationSpan = submitButton.querySelector('.send-confirmation');
+        sendConfirmationSpan.classList.add('animate__fadeOut');
+
+
+        const loader = document.createElement('span');
+        loader.classList.add('loader');
+        sendConfirmationSpan.style.display = 'none';
+        submitButton.appendChild(loader);
+        submitButton.style.backgroundColor = '#81948b';
+
+        let error;
+
+        const fetchTimeout = setTimeout(() => {
+            supabaseClient.from('confirms').insert(assistant).then(({ error }) => error = error);
+            console.log(error);
+        }, 2000);
+
+        if (!error) {
+
+            setTimeout(() => {
+                submitButton.removeAttribute('style');
+                submitButton.classList.remove('sending');
+                submitButton.innerText = '✔ Confirmación enviada!';
+
+                clearTimeout(fetchTimeout);
+                form.reset()
+            }, 2000)
+
+            setTimeout(() => {
+                submitButton.innerHTML = `<span class="send-confirmation animate__animated">Enviar confirmación</span>`;
+            }, 4000)
+        }
+
     }
 
     return (
         <>
             <h6 >Confirmación de asistencia</h6>
-            <small>
+            <div id="confirmation-header">
                 <p>
                     Por favor, rellena este cuestionario para que podamos contar contigo. Es necesario responder a todas las preguntas, a ser posible, antes del <span id="date">01/09/2024</span>.
                 </p>
                 <p>
                     El cuestionario debe rellenarse por persona (incluido niños/as y bebés (trona)). <span id="thank">¡Muchas gracias!</span>
                 </p>
-            </small>
+            </div>
 
             <form id="confirm-assist-form" method="post" onSubmit={handleSubmit}>
                 <div id="name-input-container">
@@ -124,9 +157,9 @@ const ConfirmAssistContent = () => {
                         <input type="text" name="other-allergens" id="other-allergens-input" className="hidden" ref={otherAllergenInputRef} />
                     </div>
                 </div>
-                <div id="bus-container">
+                <div id="vegan-container">
                     <h6>Opción vegana</h6>
-                    <div id="bus-confirmation">
+                    <div id="vegan-confirmation">
                         <div>
                             <input type="radio" name="confirm-vegan-option" id="yes" value="yes" />
                             <label htmlFor="yes">Sí</label>
@@ -138,8 +171,7 @@ const ConfirmAssistContent = () => {
                     </div>
                 </div>
             </form>
-            <button form="confirm-assist-form" className="button" ref={submitButtonRef}>Enviar confirmación</button>
-            <div id="toast-container"></div>
+            <button form="confirm-assist-form" className="button confirm-assist" ref={submitButtonRef}><span className="send-confirmation animate__animated">Enviar confirmación</span></button>
         </>
     )
 

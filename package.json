@@ -22,7 +22,8 @@
     "resend": "^3.4.0"
   },
   "devDependencies": {
-    "@types/react": "^18.3.3"
+    "@types/react": "^18.3.3",
+    "animate.css": "^4.1.1"
   },
   "eslintConfig": {
     "extends": "standard"

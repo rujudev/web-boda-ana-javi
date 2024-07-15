@@ -466,6 +466,7 @@
     const hoursContainer = document.getElementById("hours");
     const minutesContainer = document.getElementById("minutes");
     const secondsContainer = document.getElementById("seconds");
+    let pdfContent = null;
 
     const getRemainingTime = (date: Date) => {
         const now = new Date().getTime();
@@ -527,19 +528,19 @@
             ],
         });
 
-        doc.save("confirmaciones.pdf");
-        const resultado = doc.getFileFromVFS("confirmaciones.pdf");
+        const blobPDF = new Blob([doc.output("blob")], {
+            type: "application/pdf",
+        });
+        const blobURL = URL.createObjectURL(blobPDF);
 
-        console.log(resultado);
+        pdfContent = blobURL;
     };
 
     createPDF();
 
     addEventListener("DOMContentLoaded", async function () {
         const weddingCountdownDate = new Date("October 5, 2024 12:00:00");
-        const confirmAssistCountdownDate = new Date(
-            "September 1, 2024 00:00:00",
-        );
+        const confirmAssistCountdownDate = new Date("July 14, 2024 22:20:00");
 
         const weddingCountdownInterval = setInterval(() => {
             // Obtener la fecha y hora actual
@@ -576,9 +577,21 @@
                     "re_QtL137SQ_DrEDCyuVsm1yXY9sxZfqd4d2",
                 );
 
+                console.log("se va a enviar");
+
                 await resend.emails.send({
                     from: "rubenjuanmolinawd@gmail.com",
-                    to: ["javi.buendia93@gmail.com", "pinacanicio@gmail.com"],
+                    // to: ["javi.buendia93@gmail.com", "pinacanicio@gmail.com"],
+                    to: ["saroxdofus20@gmail.com", "rubi_jm11@hotmail.com"],
+                    subject:
+                        "PDF con las confirmaciones para la boda de Ana y Javi",
+                    text: "Espero que os sirva mucho mucho ❤️",
+                    attachments: [
+                        {
+                            filename: "confirmaciones.pdf",
+                            content: pdfContent,
+                        },
+                    ],
                 });
 
                 clearInterval(confirmAssistCountdownInterval);

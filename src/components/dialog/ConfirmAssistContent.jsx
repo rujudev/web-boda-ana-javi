@@ -75,14 +75,24 @@ const ConfirmAssistContent = () => {
         submitButton.appendChild(loader);
         submitButton.style.backgroundColor = '#81948b';
 
-        let error;
+        let error = false;
 
         const fetchTimeout = setTimeout(() => {
             supabaseClient.from('confirms').insert(assistant).then(({ error }) => error = error);
-            console.log(error);
         }, 2000);
 
         if (!error) {
+            await fetch('api/whatsapp/send', {
+                method: 'POST',
+                body: JSON.stringify({
+                    assistant
+                })
+            });
+
+            await fetch("api/email/send", {
+                method: "POST",
+                body: JSON.stringify({ message: `${assistant.name} ha confirmado su asistencia a la boda el día ${new Date().toLocaleString()}` }),
+            });
 
             setTimeout(() => {
                 submitButton.removeAttribute('style');
@@ -115,18 +125,18 @@ const ConfirmAssistContent = () => {
             <form id="confirm-assist-form" method="post" onSubmit={handleSubmit}>
                 <div id="name-input-container">
                     <label htmlFor="name">Nombre y apellidos</label>
-                    <input type="text" id="name" name="name" />
+                    <input type="text" id="name" name="name" required />
                 </div>
                 <div id="bus-container">
                     <h6>¿Asistirás en autobús?</h6>
                     <span>Habrá autobús de ida y vuelta con salida en Avda. Constitución, 36 Novelda.</span>
                     <div id="bus-confirmation">
                         <div>
-                            <input type="radio" name="confirm-bus-option" id="yes" value="yes" />
+                            <input type="radio" name="confirm-bus-option" id="yes" value="yes" required />
                             <label htmlFor="yes">Sí, voy en autobús</label>
                         </div>
                         <div>
-                            <input type="radio" name="confirm-bus-option" id="no" value="no" />
+                            <input type="radio" name="confirm-bus-option" id="no" value="no" required />
                             <label htmlFor="no">No, voy por mi cuenta</label>
                         </div>
                     </div>
@@ -161,11 +171,11 @@ const ConfirmAssistContent = () => {
                     <h6>Opción vegana</h6>
                     <div id="vegan-confirmation">
                         <div>
-                            <input type="radio" name="confirm-vegan-option" id="yes" value="yes" />
+                            <input type="radio" name="confirm-vegan-option" id="yes" value="yes" required />
                             <label htmlFor="yes">Sí</label>
                         </div>
                         <div>
-                            <input type="radio" name="confirm-vegan-option" id="no" value="no" />
+                            <input type="radio" name="confirm-vegan-option" id="no" value="no" required />
                             <label htmlFor="no">No</label>
                         </div>
                     </div>

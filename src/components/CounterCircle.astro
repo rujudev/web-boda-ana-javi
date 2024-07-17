@@ -447,14 +447,6 @@
         </div>
     </div>
 </div>
-<table id="confirmations-table" style="display: none;">
-    <thead>
-        <th>Nombre</th>
-        <th>Alergias</th>
-        <th>Bus</th>
-    </thead>
-    <tbody> </tbody>
-</table>
 
 <script>
     import lottie from "lottie-web";
@@ -483,8 +475,23 @@
         return { days, hours, minutes, seconds, remainingTime };
     };
 
+    const csvmaker = (data) => {
+        // Get the keys (headers) of the object
+        const headers = Object.keys(data);
+
+        // Get the values of the object
+        const values = Object.values(data);
+
+        // Join the headers and values with commas and newlines to create the CSV string
+        return [headers.join(","), values.join(",")].join("\n");
+    };
+
     const createPDF = async () => {
         const { data, error } = await supabaseClient.from("confirms").select();
+
+        // const csv = await supabaseClient.from("confirms").select().csv();
+
+        // const blobCSC = URL.createObjectURL(csv);
 
         const confirms = data?.map((confirm) => ({
             ...confirm,
@@ -531,9 +538,8 @@
         const blobPDF = new Blob([doc.output("blob")], {
             type: "application/pdf",
         });
-        const blobURL = URL.createObjectURL(blobPDF);
 
-        pdfContent = blobURL;
+        return URL.createObjectURL(blobPDF);
     };
 
     createPDF();
@@ -572,31 +578,11 @@
                 getRemainingTime(confirmAssistCountdownDate);
 
             if (confirmAssistRemainingTime <= 0) {
-                const { Resend } = await import("resend");
-                const resend = new Resend(
-                    "re_QtL137SQ_DrEDCyuVsm1yXY9sxZfqd4d2",
-                );
-
-                console.log("se va a enviar");
-
-                await resend.emails.send({
-                    from: "rubenjuanmolinawd@gmail.com",
-                    // to: ["javi.buendia93@gmail.com", "pinacanicio@gmail.com"],
-                    to: ["saroxdofus20@gmail.com", "rubi_jm11@hotmail.com"],
-                    subject:
-                        "PDF con las confirmaciones para la boda de Ana y Javi",
-                    text: "Espero que os sirva mucho mucho ❤️",
-                    attachments: [
-                        {
-                            filename: "confirmaciones.pdf",
-                            content: pdfContent,
-                        },
-                    ],
-                });
+                // ENVIAR EL CORREO CON EL EXCEL Y BLOQUEAR EL BOTÓN DE CONFIRMAR
 
                 clearInterval(confirmAssistCountdownInterval);
             }
-        }, 1000);
+        }, 604800016.56); // cada semana
     });
 
     let svgAnimHeartContainer = document.querySelector("#anim-heart");

@@ -77,17 +77,17 @@ const ConfirmAssistContent = () => {
 
         let error = false;
 
-        const fetchTimeout = setTimeout(() => {
-            supabaseClient.from('confirms').insert(assistant).then(({ error }) => error = error);
-        }, 2000);
+        // const fetchTimeout = setTimeout(() => {
+        //     supabaseClient.from('confirms').insert(assistant).then(({ error }) => error = error);
+        // }, 2000);
 
         if (!error) {
-            await fetch('api/whatsapp/send', {
-                method: 'POST',
-                body: JSON.stringify({
-                    assistant
-                })
-            });
+            // await fetch('api/whatsapp/send', {
+            //     method: 'POST',
+            //     body: JSON.stringify({
+            //         assistant
+            //     })
+            // });
 
             await fetch("api/email/send", {
                 method: "POST",

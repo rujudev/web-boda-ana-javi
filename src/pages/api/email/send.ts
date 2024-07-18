@@ -1,7 +1,6 @@
 import type { APIRoute } from "astro";
 import { Resend } from "resend";
 import { supabaseClient } from "../../../db/config";
-
 import { createXlsx } from "../../../utils/utils";
 
 const resend = new Resend(
@@ -26,8 +25,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     const { data: emailData, error: emailError } = await resend.emails.send({
         from: "ruben@labodadepinaybuendia.es",
-        // to: ["javi.buendia93@gmail.com", "pinacanicio@gmail.com"],
-        to: ['saroxdofus20@gmail.com'],
+        to: ["javi.buendia93@gmail.com", "pinacanicio@gmail.com"],
         subject:
             "Documento excel con las confirmaciones para la boda de Ana y Javi",
         text: "Espero que os sirva mucho mucho ❤️",

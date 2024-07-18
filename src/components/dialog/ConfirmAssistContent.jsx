@@ -89,11 +89,6 @@ const ConfirmAssistContent = () => {
                 })
             });
 
-            await fetch("api/email/send", {
-                method: "POST",
-                body: JSON.stringify({ message: `${assistant.name} ha confirmado su asistencia a la boda el día ${new Date().toLocaleString()}` }),
-            });
-
             setTimeout(() => {
                 submitButton.removeAttribute('style');
                 submitButton.classList.remove('sending');

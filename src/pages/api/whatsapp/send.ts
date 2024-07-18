@@ -14,24 +14,6 @@ let options = {
 
 export const POST: APIRoute = async ({ request }) => {
     const { assistant } = await request.json();
-    // Subir el archivo a supabase storage (bucket = 'archivos')
-    // Obtener la URL del archivo .xlsx en el bucket
-    // Subir el archivo a wassenger con la URL
-    // mandar el mensaje al grupo con la ID del archivo subido
-    // const { data, error } = await supabaseClient.from("confirms").select();
-
-    // const confirms = data?.map((confirm) => ({
-    //     ...confirm,
-    //     with_bus: confirm?.with_bus ? "Si" : "No",
-    //     with_vegan_menu: confirm?.with_vegan_menu ? "Si" : "No",
-    //     allergens: confirm.allergens
-    //         .map((allergen: String) =>
-    //             allergen.padStart(allergen.length + 1, "- "),
-    //         )
-    //         .join("\n"),
-    // }));
-
-    // const xlsBuffer = await createXlsx(confirms);
 
     options = {
         ...options,

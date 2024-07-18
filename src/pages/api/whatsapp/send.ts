@@ -1,6 +1,4 @@
 import type { APIRoute } from "astro";
-import { supabaseClient } from "../../../db/config";
-import { createXlsx } from "../../../utils/utils";
 
 const url = 'https://api.wassenger.com/v1/messages';
 let options = {

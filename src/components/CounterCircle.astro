@@ -579,8 +579,24 @@
 
             if (confirmAssistRemainingTime <= 0) {
                 // ENVIAR EL CORREO CON EL EXCEL Y BLOQUEAR EL BOTÓN DE CONFIRMAR
+                fetch("api/email/send", {
+                    method: "POST",
+                });
 
                 clearInterval(confirmAssistCountdownInterval);
+            }
+        }, 1000); // Cuando llegue el límite de fecha para confirmar
+
+        const sendEmailDocumentEachWeek = setInterval(() => {
+            const { remainingTime: confirmAssistRemainingTime } =
+                getRemainingTime(confirmAssistCountdownDate);
+
+            if (confirmAssistRemainingTime > 0) {
+                fetch("api/email/send", {
+                    method: "POST",
+                });
+
+                clearInterval(sendEmailDocumentEachWeek);
             }
         }, 604800016.56); // cada semana
     });

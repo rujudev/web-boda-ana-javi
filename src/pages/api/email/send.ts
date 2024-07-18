@@ -27,7 +27,7 @@ export const POST: APIRoute = async ({ request }) => {
     const { data: emailData, error: emailError } = await resend.emails.send({
         from: "ruben@labodadepinaybuendia.es",
         // to: ["javi.buendia93@gmail.com", "pinacanicio@gmail.com"],
-        to: ["saroxdofus20@gmail.com", "rubi_jm11@hotmail.com"],
+        to: ['saroxdofus20@gmail.com'],
         subject:
             "Documento excel con las confirmaciones para la boda de Ana y Javi",
         text: "Espero que os sirva mucho mucho ❤️",
@@ -38,6 +38,8 @@ export const POST: APIRoute = async ({ request }) => {
             },
         ],
     });
+
+
 
     const response = {
         message: emailError && !emailData ? 'Ha ocurrido un error al enviar el email' : 'Email enviado con éxito',

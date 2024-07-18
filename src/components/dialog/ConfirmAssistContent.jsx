@@ -107,7 +107,6 @@ const ConfirmAssistContent = () => {
                 submitButton.innerHTML = `<span class="send-confirmation animate__animated">Enviar confirmación</span>`;
             }, 4000)
         }
-
     }
 
     return (

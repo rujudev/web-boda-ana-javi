@@ -547,7 +547,12 @@
     addEventListener("DOMContentLoaded", async function () {
         const weddingCountdownDate = new Date("October 5, 2024 12:00:00");
         const confirmAssistCountdownDate = new Date(
-            "September 1, 2024 22:20:00",
+            "September 1, 2024 00:00:00",
+        );
+
+        // mirar de guardar en local store ya que cada vez que se renerice la pagina será esta fecha
+        const sendEmailDocumentEachWeekDate = new Date(
+            "July 18, 2024 19:15:00",
         );
 
         const weddingCountdownInterval = setInterval(() => {
@@ -590,17 +595,22 @@
         }, 1000); // Cuando llegue el límite de fecha para confirmar
 
         const sendEmailDocumentEachWeek = setInterval(() => {
-            const { remainingTime: confirmAssistRemainingTime } =
-                getRemainingTime(confirmAssistCountdownDate);
+            const { remainingTime: sendEmailRemainingTime } = getRemainingTime(
+                sendEmailDocumentEachWeekDate,
+            );
 
-            if (confirmAssistRemainingTime > 0) {
+            if (sendEmailRemainingTime <= 0) {
                 fetch("api/email/send", {
                     method: "POST",
                 });
 
+                sendEmailDocumentEachWeekDate.setDate(
+                    sendEmailDocumentEachWeekDate.getDate() + 7,
+                );
+
                 clearInterval(sendEmailDocumentEachWeek);
             }
-        }, 604800016.56); // cada semana
+        }, 1000); // cada semana
     });
 
     let svgAnimHeartContainer = document.querySelector("#anim-heart");

@@ -21,6 +21,7 @@ export const POST: APIRoute = async ({ request }) => {
             .join("\n"),
     }));
 
+
     const xlsBuffer = await createXlsx(confirms)
 
     const { data: emailData, error: emailError } = await resend.emails.send({
@@ -37,13 +38,10 @@ export const POST: APIRoute = async ({ request }) => {
         ],
     });
 
-
-
     const response = {
         message: emailError && !emailData ? 'Ha ocurrido un error al enviar el email' : 'Email enviado con éxito',
         status: emailError && !emailData ? 400 : 200
     }
-
 
     return new Response(JSON.stringify(response))
 }

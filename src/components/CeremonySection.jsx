@@ -6,7 +6,6 @@ import "../styles/ceremony-section.style.css"
 const CeremonySection = () => {
     const [dialogType, setDialogType] = useState(dialogEnum.HOW_TO_GET_CEREMONY)
     const dialogRef = useRef(null)
-    const [width, setWidth] = useState(0);
     const height = useRef(null);
 
     const initAnimations = () => {
@@ -81,14 +80,18 @@ const CeremonySection = () => {
 
         if (dialog) {
             dialog.showModal();
+
+            if (type === dialogEnum.CONFIRM_ASSIST) {
+                dialog.classList.add('confirm-assist')
+            }
+
+            document.body.style.overflowY = 'hidden';
         }
     }
 
     useEffect(() => {
         initAnimations();
     }, [])
-
-
 
     return (
         <>

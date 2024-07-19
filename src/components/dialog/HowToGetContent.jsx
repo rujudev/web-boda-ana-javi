@@ -7,7 +7,7 @@ const Title = ({ title }) => {
 }
 
 const Map = ({ url }) => {
-    return <iframe src={url} width="600" height="450" style={{ border: 0 }} allowFullScreen={true} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+    return <iframe src={url} style={{ border: 0 }} allowFullScreen={true} loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
 }
 
 const GoogleMapsLink = ({ url }) => {

@@ -20,20 +20,26 @@ dialog {
     background-color: #faf7f3;
     margin: auto;
     width: auto;
+    height: calc(100dvh - 20em);
 
     @media (min-width: 879px) {
         & {
-            max-width: 700px;
+            max-width: 800px;
         }
     }
 
     &[open] {
-        display: grid;
+        display: flex;
+        flex-direction: column;
 
         @media (max-width: 878px) {
             & {
                 margin-inline: 1em;
             }
+        }
+
+        iframe {
+            height: 100%;
         }
     }
 
@@ -51,7 +57,10 @@ dialog {
             & #date {
                 font-weight: bolder;
             }
+        }
 
+        & #container {
+            overflow-x: auto;
         }
 
         & #bus-container {
@@ -157,7 +166,7 @@ dialog {
             display: flex;
             flex-direction: column;
             gap: 1em;
-            overflow-x: auto;
+            /* overflow-x: auto; */
 
             & h6 {
                 font-size: 20px;
@@ -215,6 +224,13 @@ dialog {
 
     &::backdrop {
         background-color: rgba(74, 99, 96, .9);
+    }
+
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+        & {
+            height: calc(100dvh - 4em);
+            margin-block: 1em !important;
+        }
     }
 }
 

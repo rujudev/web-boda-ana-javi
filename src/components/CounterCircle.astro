@@ -535,7 +535,7 @@
                     })
                     .eq("id", 1);
             }
-        }, 1000); // cada semana
+        }, 1000); // cada semana, cuando se visite la web, se enviará el email y se actualizará la fecha a la semana siguiente, hasta que llegue al límite de tiempo
 
         const confirmAssistCountdownInterval = setInterval(async () => {
             const { remainingTime } = getRemainingTime(

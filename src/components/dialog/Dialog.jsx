@@ -15,12 +15,11 @@ const Dialog = forwardRef(({ type }, ref) => {
 		if (ref) {
 			const dialog = ref.current;
 
-			console.log(dialog);
-
 			if (dialog.classList.contains('confirm-assist')) {
 				dialog.removeAttribute('class')
 			}
 
+			document.body.removeAttribute('style');
 			dialog.close();
 		}
 	}

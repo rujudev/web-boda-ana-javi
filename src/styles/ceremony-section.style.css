@@ -108,6 +108,7 @@
             &::after {
                 position: absolute;
                 z-index: -1;
+                mix-blend-mode: darken;
             }
 
             &::before {

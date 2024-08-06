@@ -22,12 +22,18 @@ import CeremonySection from "../components/CeremonySection";
 	const parallaxPortadaImg = parallaxPortada.querySelector("img");
 	const xxlQuery = window.matchMedia("(min-width: 1920px)");
 
-	xxlQuery.addEventListener("change", function (e) {
+	const getBackgroundImgSrc = (match) => {
 		let src = `../assets/imgs/`;
 
-		e.matches
-			? (parallaxPortadaImg.src = src + "portada.webp")
-			: (parallaxPortadaImg.src = src + "portada_2.webp");
+		return match ? src + "portada.webp" : src + "portada_2.webp";
+	};
+
+	xxlQuery.addEventListener("change", function (e) {
+		parallaxPortadaImg.src = getBackgroundImgSrc(e.matches);
+	});
+
+	document.addEventListener("DOMContentLoaded", function () {
+		parallaxPortadaImg.src = getBackgroundImgSrc(window.innerWidth >= 1920);
 	});
 
 	document.addEventListener("scroll", function () {

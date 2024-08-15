@@ -60,6 +60,19 @@
 
     & #bus-container {
         grid-area: bus;
+
+        & .anim-bus {
+            position: relative;
+
+            & svg {
+                position: absolute;
+                inset: 0;
+
+                & path {
+                    fill: #81948b;
+                }
+            }
+        }
     }
 
     & #parking-container {

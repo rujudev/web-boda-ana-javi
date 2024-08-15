@@ -8,7 +8,6 @@
         "bus"
         "parking"
         "confirm-assist";
-
     row-gap: 5em;
 
     @media (min-width: 780px) {

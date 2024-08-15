@@ -193,7 +193,7 @@ const CeremonySection = () => {
                     <div className="hour">
                         <h6>Hora</h6>
                         <div className="departure-arrival-hour-container">
-                            <div className="departure-hour-container"><span className="departure-title">Salida: </span><span>12:00 H.</span></div>
+                            <div className="departure-hour-container"><span className="departure-title">Salida: </span><span>13:00 H.</span></div>
                             <div className="arrival-hour-container"><span className="arrival-title">Regreso:</span><span>20:00 H.</span></div>
                         </div>
                     </div>
@@ -206,35 +206,6 @@ const CeremonySection = () => {
 
                         <button id="ceremony-address-button" className="button" onClick={() => toggleOpenDialog(dialogEnum.HOW_TO_GET_BUS)}>¿Cómo llegar?</button>
                     </div>
-                    {/* <div className="departure-arrival-container">
-                        <div className="departure">
-                            <h6>Salida</h6>
-                            <div className="hour">
-                                <h6>Hora</h6>
-                                <span>13:30 H.</span>
-                            </div>
-                            <div className="address">
-                                <h6>Lugar</h6>
-                                <span className="site-address">Carrer Major, 6 Novelda, Alicante</span>
-
-                                <button id="celebration-address-button" className="button" onClick={() => toggleOpenDialog(dialogEnum.HOW_TO_GET_CELEBRATION)}>¿Cómo llegar?</button>
-                            </div>
-                        </div>
-                        <div className="arrival">
-                            <h6>Regreso</h6>
-                            <div className="hour">
-                                <h6>Hora</h6>
-                                <span>20:00 H.</span>
-                            </div>
-                            <div className="address">
-                                <h6>Lugar</h6>
-                                <span className="site-address">Carrer Major, 6 Novelda, Alicante</span>
-
-                                <button id="celebration-address-button" className="button" onClick={() => toggleOpenDialog(dialogEnum.HOW_TO_GET_CELEBRATION)}>¿Cómo llegar?</button>
-                            </div>
-                        </div>
-
-                    </div> */}
                 </div>
                 <div id="parking-container">
                     <div className="anim-parking circle"></div>

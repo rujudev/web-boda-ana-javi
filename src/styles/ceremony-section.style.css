@@ -5,21 +5,23 @@
     grid-template-columns: 1fr;
     grid-template-areas: "ceremony"
         "party"
-        "confirm-assist";
+        "confirm-assist"
+        "bus"
+        "parking";
 
-    column-gap: 5em;
     row-gap: 5em;
 
     @media (min-width: 780px) {
         & {
             grid-template-columns: max-content max-content;
             grid-template-areas: "ceremony party"
+                "bus parking"
                 "confirm-assist confirm-assist";
             justify-content: center;
         }
     }
 
-    @media (min-width: 850px) {
+    @media (min-width: 1024px) {
         & {
             column-gap: 10em;
         }
@@ -56,6 +58,14 @@
         grid-area: party;
     }
 
+    & #bus-container {
+        grid-area: bus;
+    }
+
+    & #parking-container {
+        grid-area: parking;
+    }
+
     & #assist-button-container {
         grid-area: confirm-assist;
         display: flex;
@@ -83,7 +93,9 @@
     }
 
     & #ring-container,
-    & #party-container {
+    & #party-container,
+    & #bus-container,
+    & #parking-container {
         max-width: 580px;
         width: 100%;
         display: flex;
@@ -91,7 +103,9 @@
         align-items: center;
 
         & .ceremony-title-container,
-        & .party-title-container {
+        & .party-title-container,
+        & .bus-title-container,
+        & .parking-title-container {
             display: flex;
             align-items: center;
             position: relative;
@@ -133,6 +147,10 @@
         }
 
         & .hour {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+
             & span {
                 font-family: FireSansExtralight;
             }
@@ -141,19 +159,101 @@
         & .hour,
         & .address {
             text-align: center;
+
+            & h6 {
+                padding-bottom: 0;
+            }
         }
 
         & .address {
             display: flex;
             flex-direction: column;
             gap: 1em;
-            margin-top: 3em;
+            margin-top: 30px;
+            max-width: 340px;
+            min-width: 300px;
 
             & h6 {
                 margin: 0;
             }
+
+            & .addresses-container {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 3em;
+            }
         }
 
+    }
+
+    & #bus-container {
+        & .departure-arrival-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1em;
+
+            @media (min-width: 1400px) {
+                & {
+                    grid-template-columns: 1fr 1fr;
+                }
+            }
+        }
+    }
+
+    & .departure-arrival-hour-container {
+        display: flex;
+        flex-direction: column;
+        gap: .5em;
+
+        & .departure-hour-container,
+        & .arrival-hour-container {
+            display: flex;
+            justify-content: space-between;
+            gap: .5em;
+        }
+    }
+
+    & .departure-arrival-address-container {
+        display: flex;
+        flex-direction: column;
+        gap: .5em;
+
+        & .departure-address-container,
+        & .arrival-address-container {
+            display: flex;
+            justify-content: space-between;
+            gap: .5em;
+
+            & span {
+                max-width: 200px;
+                text-wrap: pretty;
+                text-align: left;
+            }
+        }
+    }
+
+    & .parking-pinmap-container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: .5em;
+
+        @media (min-width: 780px) {
+            & {
+                flex-direction: row;
+            }
+        }
+
+        & .anim-pinmap {
+            cursor: pointer;
+            display: block;
+            width: 65px;
+            height: 65px;
+
+            & path {
+                fill: #81948b;
+            }
+        }
     }
 
     & span {
@@ -163,6 +263,12 @@
         &.site-name {
             text-transform: uppercase;
         }
+
+        &.departure-title,
+        &.arrival-title {
+            font-family: 'Open Sans', sans-serif !important;
+        }
+
     }
 }
 
@@ -181,7 +287,116 @@
 }
 
 .anim-anillos,
-.anim-fiesta {
+.anim-fiesta,
+.anim-bus,
+.anim-parking {
     width: 125px;
     height: 125px;
+}
+
+.anim-bus,
+.anim-parking {
+    & path {
+        stroke: #81948b;
+    }
+}
+
+:root {
+    --primary-color: #faf7f3;
+    --non-active-secondary-color: rgb(144, 158, 155);
+    --secondary-color: rgb(74, 99, 96);
+}
+
+.container {
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.tabs {
+    display: flex;
+    position: relative;
+    background-color: transparent;
+    padding: 0.75rem;
+    border-radius: 99px;
+    gap: 3em;
+
+    * {
+        z-index: 2;
+    }
+
+    @media (max-width: 700px) {
+        & {
+            transform: scale(0.8);
+        }
+    }
+
+    & .tab {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 54px;
+        width: fit-content;
+        font-size: 1.25rem;
+        font-weight: 500;
+        transition: color 0.15s ease-in;
+        background-color: var(--non-active-secondary-color);
+
+        & button {
+            color: var(--primary-color);
+            background: none;
+            cursor: pointer;
+            border: none;
+            width: fit-content;
+            height: 100%;
+            padding-inline: 20px;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        &::after,
+        &::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: inherit;
+        }
+
+        &::after {
+            right: -25px;
+            border-radius: 0 8px 0 0;
+            transform: skew(25deg);
+        }
+
+        &::before {
+            left: -25px;
+            border-radius: 8px 0 0 0;
+            transform: skew(-25deg);
+        }
+
+        &.active {
+            z-index: 50;
+            background-color: var(--secondary-color);
+        }
+    }
+
+}
+
+.content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    & iframe {
+        height: 100%;
+    }
 }

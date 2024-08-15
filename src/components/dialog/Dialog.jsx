@@ -7,6 +7,8 @@ export const dialogEnum = {
 	HOW_TO_GET: 'how_to_get',
 	HOW_TO_GET_CEREMONY: 'how_to_get_ceremony',
 	HOW_TO_GET_CELEBRATION: 'how_to_get_celebration',
+	HOW_TO_GET_BUS: 'how_to_get_bus',
+	HOW_TO_GET_PARKING: 'how_to_get_parking',
 	CONFIRM_ASSIST: 'confirm_assist'
 }
 

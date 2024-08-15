@@ -21,6 +21,7 @@ dialog {
     margin: auto;
     width: auto;
     height: calc(100dvh - 20em);
+    min-height: 350px;
 
     @media (min-width: 879px) {
         & {

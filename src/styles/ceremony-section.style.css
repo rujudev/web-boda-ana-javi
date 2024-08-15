@@ -5,9 +5,9 @@
     grid-template-columns: 1fr;
     grid-template-areas: "ceremony"
         "party"
-        "confirm-assist"
         "bus"
-        "parking";
+        "parking"
+        "confirm-assist";
 
     row-gap: 5em;
 

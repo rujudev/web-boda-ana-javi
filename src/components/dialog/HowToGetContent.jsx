@@ -68,7 +68,7 @@ const HowToGetContent = ({ type }) => {
             });
         } else if (type === dialogEnum.HOW_TO_GET_BUS) {
             setContent({
-                title: 'Paradas del Autobús',
+                title: 'Paradas del autobús',
                 sites: [
                     {
                         id: 'site1',

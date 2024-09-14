@@ -217,11 +217,14 @@ const CeremonySection = () => {
                         <a href="https://maps.app.goo.gl/q28oV6tdBPpNSjGR6"><span className="anim-pinmap"></span></a>
                     </div>
                 </div>
+
                 <div id="assist-button-container" style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-                    <h2>¡Te esperamos!</h2>
-                    <button id="confirm-assist-button" className="button" onClick={() => toggleOpenDialog(dialogEnum.CONFIRM_ASSIST)}>Confirmar Asistencia</button>
+                    <h2>¡Gracias por tod@s las confirmaciones!</h2>
+                    <span>Os esperamos a todos en <strong>CENTRO CULTURAL GÓMEZ TORTOSA</strong> a las <strong>12:00H</strong> el día <strong>05/10/2024</strong></span>
+                    {/* <h2>¡Te esperamos!</h2>
+                    <button id="confirm-assist-button" className="button" onClick={() => toggleOpenDialog(dialogEnum.CONFIRM_ASSIST)}>Confirmar Asistencia</button> */}
                 </div>
-                <div id="right-bottom-flowers"></div>
+                <div id="right-bottom-flowers" />
             </section>
             <Dialog type={dialogType} ref={dialogRef} />
         </>

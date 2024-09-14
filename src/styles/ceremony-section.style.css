@@ -80,10 +80,17 @@
     }
 
     & #assist-button-container {
+        max-width: 580px;
         grid-area: confirm-assist;
         display: flex;
         width: 100%;
         justify-content: center;
+
+        & span {
+            line-height: 28px;
+            text-align: center;
+            text-wrap: pretty;
+        }
     }
 
     & #top-left-flowers,
@@ -100,7 +107,7 @@
     }
 
     & #right-bottom-flowers {
-        bottom: -80px;
+        bottom: 110px;
         right: 0;
         z-index: -1;
     }

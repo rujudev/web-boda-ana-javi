@@ -477,15 +477,15 @@
         const { data: sendEmailDocumentData, error: sendEmailDocumentError } =
             await supabaseClient.from("email").select();
         const weddingCountdownDate = new Date("October 5, 2024 12:00:00");
-        const confirmAssistCountdownDate = new Date(
-            "September 1, 2024 00:00:00",
-        );
+        // const confirmAssistCountdownDate = new Date(
+        //     "September 1, 2024 00:00:00",
+        // );
 
-        const nextWeekDate =
-            sendEmailDocumentData &&
-            sendEmailDocumentData[0].next_email_date_send;
+        // const nextWeekDate =
+        //     sendEmailDocumentData &&
+        //     sendEmailDocumentData[0].next_email_date_send;
 
-        const sendEmailDocumentEachWeekDate = new Date(nextWeekDate);
+        //const sendEmailDocumentEachWeekDate = new Date(nextWeekDate);
         const weddingCountdownInterval = setInterval(() => {
             // Obtener la fecha y hora actual
             const now = new Date().getTime();
@@ -511,49 +511,50 @@
             }
         }, 1000);
 
-        let confirmAssistRemainingTime = 0;
+        
+        /** DESHABILITADO DEFINITIVAMENTE */
+        //let confirmAssistRemainingTime = 0;
+        // const sendEmailDocumentEachWeek = setInterval(async () => {
+        //     const { remainingTime: sendEmailRemainingTime } = getRemainingTime(
+        //         sendEmailDocumentEachWeekDate,
+        //     );
 
-        const sendEmailDocumentEachWeek = setInterval(async () => {
-            const { remainingTime: sendEmailRemainingTime } = getRemainingTime(
-                sendEmailDocumentEachWeekDate,
-            );
+        //     if (confirmAssistRemainingTime > 0 && sendEmailRemainingTime <= 0) {
+        //         fetch("api/email/send", {
+        //             method: "POST",
+        //         });
 
-            if (confirmAssistRemainingTime > 0 && sendEmailRemainingTime <= 0) {
-                fetch("api/email/send", {
-                    method: "POST",
-                });
+        //         sendEmailDocumentEachWeekDate.setDate(
+        //             sendEmailDocumentEachWeekDate.getDate() + 7,
+        //         );
 
-                sendEmailDocumentEachWeekDate.setDate(
-                    sendEmailDocumentEachWeekDate.getDate() + 7,
-                );
+        //         const { error: newNextWeekError } = await supabaseClient
+        //             .from("email")
+        //             .update({
+        //                 next_email_date_send:
+        //                     sendEmailDocumentEachWeekDate.toISOString(),
+        //             })
+        //             .eq("id", 1);
+        //     }
+        // }, 1000); // cada semana, cuando se visite la web, se enviará el email y se actualizará la fecha a la semana siguiente, hasta que llegue al límite de tiempo
 
-                const { error: newNextWeekError } = await supabaseClient
-                    .from("email")
-                    .update({
-                        next_email_date_send:
-                            sendEmailDocumentEachWeekDate.toISOString(),
-                    })
-                    .eq("id", 1);
-            }
-        }, 1000); // cada semana, cuando se visite la web, se enviará el email y se actualizará la fecha a la semana siguiente, hasta que llegue al límite de tiempo
+        // const confirmAssistCountdownInterval = setInterval(async () => {
+        //     const { remainingTime } = getRemainingTime(
+        //         confirmAssistCountdownDate,
+        //     );
 
-        const confirmAssistCountdownInterval = setInterval(async () => {
-            const { remainingTime } = getRemainingTime(
-                confirmAssistCountdownDate,
-            );
+        //     confirmAssistRemainingTime = remainingTime;
 
-            confirmAssistRemainingTime = remainingTime;
+        //     if (confirmAssistRemainingTime <= 0) {
+        //         // ENVIAR EL CORREO CON EL EXCEL Y BLOQUEAR EL BOTÓN DE CONFIRMAR
+        //         fetch("api/email/send", {
+        //             method: "POST",
+        //         });
 
-            if (confirmAssistRemainingTime <= 0) {
-                // ENVIAR EL CORREO CON EL EXCEL Y BLOQUEAR EL BOTÓN DE CONFIRMAR
-                fetch("api/email/send", {
-                    method: "POST",
-                });
-
-                clearInterval(confirmAssistCountdownInterval);
-                clearInterval(sendEmailDocumentEachWeek);
-            }
-        }, 1000); // Cuando llegue el límite de fecha para confirmar
+        //         clearInterval(confirmAssistCountdownInterval);
+        //         clearInterval(sendEmailDocumentEachWeek);
+        //     }
+        // }, 1000); // Cuando llegue el límite de fecha para confirmar
     });
 
     let svgAnimHeartContainer = document.querySelector("#anim-heart");

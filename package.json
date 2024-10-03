@@ -1,34 +1,35 @@
 {
-  "name": "web-boda-javi-ana",
-  "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "disableDevToolbar": "astro preferences disable devToolbar",
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "@astrojs/react": "^3.6.0",
-    "@astrojs/vercel": "^7.7.2",
-    "@supabase/supabase-js": "^2.43.5",
-    "astro": "^4.11.6",
-    "lottie-web": "^5.12.2",
-    "qrcode-terminal": "^0.12.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "resend": "^3.4.0",
-    "whatsapp-web.js": "^1.24.0"
-  },
-  "devDependencies": {
-    "@types/qrcode-terminal": "^0.12.2",
-    "@types/react": "^18.3.3",
-    "animate.css": "^4.1.1",
-    "exceljs": "^4.4.0"
-  },
-  "eslintConfig": {
-    "extends": "standard"
-  }
+	"name": "web-boda-javi-ana",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"disableDevToolbar": "astro preferences disable devToolbar",
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro"
+	},
+	"dependencies": {
+		"@astrojs/react": "^3.6.0",
+		"@astrojs/vercel": "^7.7.2",
+		"@supabase/supabase-js": "^2.43.5",
+		"astro": "^4.11.6",
+		"lottie-web": "^5.12.2",
+		"qrcode-terminal": "^0.12.0",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1",
+		"resend": "^3.4.0",
+		"whatsapp-web.js": "^1.24.0"
+	},
+	"devDependencies": {
+		"@types/qrcode-terminal": "^0.12.2",
+		"@types/react": "^18.3.3",
+		"animate.css": "^4.1.1",
+		"canvas-confetti": "1.9.3",
+		"exceljs": "^4.4.0"
+	},
+	"eslintConfig": {
+		"extends": "standard"
+	}
 }

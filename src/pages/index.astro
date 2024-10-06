@@ -7,7 +7,7 @@ import CeremonySection from "../components/CeremonySection";
 
 <Layout title="Invitación boda Ana & Javier">
 	<div id="parallax-portada">
-		<img src="../assets/imgs/portada_2.webp" />
+		<img src="../assets/imgs/javi_y_ana.webp" />
 	</div>
 	<FirstSection />
 	<section id="second-section">
@@ -22,25 +22,25 @@ import CeremonySection from "../components/CeremonySection";
 	const parallaxPortadaImg = parallaxPortada.querySelector("img");
 	const xxlQuery = window.matchMedia("(min-width: 1920px)");
 
-	const getBackgroundImgSrc = (match) => {
-		let src = `../assets/imgs/`;
+	// const getBackgroundImgSrc = (match) => {
+	// 	let src = `../assets/imgs/`;
 
-		return match ? src + "portada.webp" : src + "portada_2.webp";
-	};
+	// 	return match ? src + "portada.webp" : src + ".webp";
+	// };
 
-	xxlQuery.addEventListener("change", function (e) {
-		parallaxPortadaImg.src = getBackgroundImgSrc(e.matches);
-	});
+	// xxlQuery.addEventListener("change", function (e) {
+	// 	parallaxPortadaImg.src = getBackgroundImgSrc(e.matches);
+	// });
 
-	document.addEventListener("DOMContentLoaded", function () {
-		parallaxPortadaImg.src = getBackgroundImgSrc(window.innerWidth >= 1920);
-	});
+	// document.addEventListener("DOMContentLoaded", function () {
+	// 	parallaxPortadaImg.src = getBackgroundImgSrc(window.innerWidth >= 1920);
+	// });
 
 	document.addEventListener("scroll", function () {
 		parallaxPortada.style.transform = `translate3d(0px, ${window.scrollY * -1}px, 0px)`;
 
 		const scrollYParallaxImg = window.scrollY * 0.5 - 20;
-		parallaxPortadaImg.style.transform = `translate3d(0px, ${scrollYParallaxImg}px, 0px)`;
+		parallaxPortadaImg.style.transform = `scaleX(-1) translate3d(0px, ${scrollYParallaxImg}px, 0px)`;
 	});
 </script>
 
@@ -55,7 +55,7 @@ import CeremonySection from "../components/CeremonySection";
 
 		& img {
 			object-fit: cover;
-			transform: translate3d(0px, -20px, 0px);
+			transform: scaleX(-1) translate3d(0px, -20px, 0px);
 			position: absolute;
 			width: 100%;
 			height: 100%;

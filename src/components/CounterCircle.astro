@@ -433,14 +433,14 @@
             </svg>
         </div>
         <div id="circle-container">
-            <span id="circle-container-title">Faltan</span>
-            <div id="counter-date-container">
-                <!-- Añadir loading a los campos hasta que se inice la cuenta atrás -->
+            <span id="circle-container-title">¡Nos hemos casado!</span>
+            <!-- <div id="counter-date-container">
+                Añadir loading a los campos hasta que se inice la cuenta atrás
                 <span id="days">-</span>
                 <span id="hours">-</span>
                 <span id="minutes">-</span>
                 <span id="seconds">-</span>
-            </div>
+            </div> -->
             <div id="anim-heart-container">
                 <div id="anim-heart"></div>
             </div>
@@ -451,6 +451,7 @@
 <script>
     import lottie from "lottie-web";
     import { supabaseClient } from "../db/config";
+    import { createConfetti } from "../utils/utils";
 
     const daysContainer = document.getElementById("days");
     const hoursContainer = document.getElementById("hours");
@@ -568,6 +569,7 @@
     });
 
     animAnillos.play();
+    createConfetti();
 </script>
 
 <style>
@@ -592,9 +594,10 @@
         position: absolute;
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 1fr max-content 1fr;
+        grid-template-rows: repeat(2, max-content);
         flex-direction: column;
         align-items: center;
+        align-content: center;
         text-align: center;
         border-radius: 50%;
         gap: 1.5em;
